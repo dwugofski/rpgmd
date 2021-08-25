@@ -1,0 +1,54 @@
+
+body #main .index_toc_header {
+	background-color: var(--accent-light);
+	border: 0.1em solid var(--accent);
+	box-sizing: border-box;
+	color: var(--accent);
+	font-family: var(--serif-font);
+	font-size: 200%;
+	font-weight: bold;
+	padding: 0.3em 0.5em;
+	text-align: center;
+}
+
+body #main .index_toc {
+	border: 0.2em solid var(--accent);
+	border-top: none;
+	list-style-type: none;
+	margin: 0 0 1em 0;
+	padding: 0.5em 1em;
+}
+body #main .index_toc ol {
+	list-style-type: none;
+}
+body #main .index_toc a {
+	color: inherit;
+	font-style: inherit;
+	text-decoration: inherit;
+}
+
+body #main .index_toc li {
+	color: var(--accent);
+	font-size: 150%;
+	font-weight: bold;
+}
+body #main .index_toc li.back {
+	font-size: 100%;
+	margin-bottom: 1em;
+}
+body #main .index_toc li ol {
+	margin-bottom: 0.2em;
+}
+body #main .index_toc li li {
+	font-size: 80%;
+	font-weight: normal;
+}
+body #main .index_toc li li li {
+	font-size: 85%;
+	font-weight: normal;
+}
+body #main .index_toc li li li li {
+	color: var(--fg);
+	font-size: 100%;
+	font-weight: normal;
+}

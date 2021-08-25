@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml[
+<!ENTITY rsquo "'">
+<!ENTITY lsquo "'">
+<!ENTITY rdquo '"'>
+<!ENTITY ldquo '"'>
+]>
+<p2emon id="shadow"
+	xmlns="https://github.com/dwugofski/p2e_mons"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://github.com/dwugofski/p2e_mons ../../../templates/creatures/creature.xsd">
+	
+	<name>Shadow</name>
+	<level>4</level>
+	<rarity>common</rarity>
+	<alignment>ce</alignment>
+	<size>medium</size>
+	<types>
+		<type>undead</type>
+	</types>
+	<traits>
+		<trait>incorporeal</trait>
+	</traits>
+	<perception>
+		<base>10</base>
+		<specials>
+			<special>darkvision</special>
+		</specials>
+	</perception>
+	<languages>
+		<language>necril</language>
+	</languages>
+	<skills>
+		<skill>
+			<name>acrobatics</name>
+			<base>10</base>
+		</skill>
+		<skill>
+			<name>stealth</name>
+			<base>14</base>
+		</skill>
+	</skills>
+	<abilities>
+      	<strength><base>-5</base></strength>
+		<dexterity><base>4</base></dexterity>
+		<constitution><base>0</base></constitution>
+		<intelligence><base>-2</base></intelligence>
+		<wisdom><base>2</base></wisdom>
+		<charisma><base>3</base></charisma>
+	</abilities>
+	<items>
+	</items>
+	<interactions>
+	</interactions>
+	<armor>
+		<base>20</base>
+	</armor>
+	<saves>
+		<fortitude>
+			<base>8</base>
+		</fortitude>
+		<reflex>
+			<base>14</base>
+		</reflex>
+		<will>
+			<base>12</base>
+		</will>
+	</saves>
+	<hitpoints>
+		<base>45</base>
+	</hitpoints>
+	<immunities>
+		<immunity>death effects</immunity>
+		<immunity>disease</immunity>
+		<immunity>paralyzed</immunity>
+		<immunity>poison</immunity>
+		<immunity>precision</immunity>
+		<immunity>unconscious</immunity>
+	</immunities>
+	<weaknesses>
+	</weaknesses>
+	<resistances>
+		<resistance>
+			<name>all (except force, ghost touch, or positive; double resistance against non-magical)</name>
+			<base>5</base>
+		</resistance>
+	</resistances>
+	<offturn>
+		<feat>
+			<name>Light Vulnerability</name>
+			<count>passive</count>
+			<description>An object shedding magical light (such as from the <i>light</i> spell) is treated as magical when used to attack the shadow. If the shadow is in an area illuminated by direct sunlight, all objects used to attack the shadow are considered magical.</description>
+            <traits>
+            </traits>
+		</feat>
+	</offturn>
+	<speeds> <!-- defaults to feet -->
+		<units>feet</units>
+		<speed>
+			<name>fly</name>
+			<base>30</base>
+		</speed>
+	</speeds>
+	<actions>
+		<attack>
+			<type>melee</type>
+			<count>1</count>
+			<name>shadow hand</name>
+			<modifier>15</modifier>
+			<traits>
+				<trait>finesse</trait>
+				<trait>magical</trait>
+			</traits>
+			<results>
+				<damage>
+					<dice>2d6+3</dice>
+					<type>negative</type>
+				</damage>
+			</results>
+		</attack>
+	</actions>
+	<spells>
+	</spells>
+	<onturn>
+		<feat>
+			<name>Shadow Spawn</name>
+			<count>passive</count>
+			<description>When a creature&rsquo;s shadow is pulled free by Steal Shadow, it becomes a shadow spawn under the command of the shadow that created it. This shadow spawn doesn&rsquo;t have Steal Shadow and is perpetually and incurably clumsy 2. If the creature the shadow spawn was pulled from dies, the shadow spawn becomes a full-fledged autonomous shadow. If the creature recovers from its enfeeblement, its shadow returns to it and the shadow spawn is extinguished.</description>
+			<traits>
+			</traits>
+		</feat>
+		<feat>
+			<name>Slink in Shadows</name>
+			<count>passive</count>
+			<description>The shadow can Hide or end its Sneak in a creature&rsquo;s or object&rsquo;s shadow.</description>
+			<traits>
+			</traits>
+		</feat>
+		<feat>
+			<name>Steal Shadow</name>
+			<count>1</count>
+			<description><b>Requirement</b> The shadow hit a living creature with a shadow hand Strike on its previous action. <b>Effect</b> The shadow pulls at the target&rsquo;s shadow, making the creature enfeebled 1. This is cumulative with other enfeebled conditions from shadows, to a maximum of enfeebled 4. If this increases a creature&rsquo;s enfeebled value to 3 or more, the target&rsquo;s shadow is separated frm its body (see shadow spawn). Enfeebled from Steal Shadow decreases by 1 every hour.</description>
+			<traits>
+				<trait>divine</trait>
+				<trait>necromancy</trait>
+			</traits>
+		</feat>
+	</onturn>
+</p2emon>

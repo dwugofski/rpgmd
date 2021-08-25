@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+	xmlns='https://github.com/dwugofski/p2e'
+	targetNamespace='https://github.com/dwugofski/p2e'
+	elementFormDefault='qualified'
+	attributeFormDefault="unqualified">
+
+	<xs:include schemaLocation="./primitives.xsd"/>
+	<xs:include schemaLocation="./rich_text.xsd"/>
+
+	<!--
+	============================================================================
+	ACTION TYPES
+	============================================================================
+	-->
+
+	<xs:simpleType name="act_count">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				Specifies how many actions or what type of action an Action takes.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:union>
+			<xs:simpleType>
+				<xs:restriction base="lower">
+					<xs:enumeration value="reaction"/>
+					<xs:enumeration value="passive"/>
+					<xs:enumeration value="free"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType>
+				<xs:restriction base="xs:positiveInteger">
+					<xs:maxInclusive value="3"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:union>
+	</xs:simpleType>
+
+	<xs:complexType name="action">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				Description of an action.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="act_count" type="act_count"/>
+			<xs:element name="name" type="name" minOccurs="0"/>
+			<xs:element name="trigger" minOccurs="0" type="richText"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

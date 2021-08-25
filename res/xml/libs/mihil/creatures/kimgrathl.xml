@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml[
+<!ENTITY rsquo "'">
+<!ENTITY lsquo "'">
+<!ENTITY rdquo '"'>
+<!ENTITY ldquo '"'>
+]>
+<p2emon id="kimgrathl"
+	xmlns="https://github.com/dwugofski/p2e_mons"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://github.com/dwugofski/p2e_mons ../../../templates/creatures/creature.xsd">
+	
+	<name>Kimgrathl</name>
+	<level>9</level>
+	<rarity>unique</rarity>
+	<alignment>lg</alignment>
+	<size>large</size>
+	<types>
+		<type>undead</type>
+	</types>
+	<traits>
+	</traits>
+	<perception>
+		<base>18</base>
+		<specials>
+			<special>darkvision</special>
+		</specials>
+	</perception>
+	<languages>
+		<language>common</language>
+		<language>goblin</language>
+		<language>elven</language>
+		<language>dwarven</language>
+	</languages>
+	<skills>
+		<skill>
+			<name>acobatics</name>
+			<base>20</base>
+		</skill>
+		<skill>
+			<name>stealth</name>
+			<base>18</base>
+		</skill>
+	</skills>
+	<abilities>
+      	<strength><base>4</base></strength>
+		<dexterity><base>7</base></dexterity>
+		<constitution><base>4</base></constitution>
+		<intelligence><base>-1</base></intelligence>
+		<wisdom><base>3</base></wisdom>
+		<charisma><base>0</base></charisma>
+	</abilities>
+	<items>
+	</items>
+	<interactions>
+	</interactions>
+	<armor>
+		<base>30</base>
+	</armor>
+	<saves>
+		<fortitude>
+			<base>15</base>
+		</fortitude>
+		<reflex>
+			<base>20</base>
+		</reflex>
+		<will>
+			<base>16</base>
+		</will>
+	</saves>
+	<hitpoints>
+		<base>120</base>
+	</hitpoints>
+	<immunities>
+		<immunity>bleed</immunity>
+		<immunity>paralyzed</immunity>
+		<immunity>poison</immunity>
+		<immunity>sleep</immunity>
+	</immunities>
+	<weaknesses>
+	</weaknesses>
+	<resistances>
+	</resistances>
+	<offturn>
+		<feat>
+			<name>High Winds</name>
+			<count>passive</count>
+			<description>20 feet. Air within the emanation is difficult terrain for flying creatures that do not have the air trait</description>
+            <traits>
+            	<trait>air</trait>
+            	<trait>aura</trait>
+            </traits>
+		</feat>
+		<feat>
+			<name>Disperse</name>
+			<count>reaction</count>
+			<description><b>Trigger:</b> Kimgrathl takes damage from a hostile action. <b>Effect</b> The living whirlwind disperses. Until the end of the current turn, it can&rsquo;t be attacked or targeted, doesn’t take up space, and any auras or emanations it has are suppressed. At the end of the turn, the living whirlwind reforms in any space in which it can fit within 50 feet of where it dispersed and any auras or emanations it has are restored as long as their duration didn’t run out while it was dispersed.</description>
+            <traits>
+            </traits>
+		</feat>
+	</offturn>
+	<speeds> <!-- defaults to feet -->
+		<units>feet</units>
+		<speed>
+			<name>fly</name>
+			<base>75</base>
+		</speed>
+		<special>swiftness</special>
+	</speeds>
+	<actions>
+		<attack>
+			<type>melee</type>
+			<count>1</count>
+			<name>gust</name>
+			<modifier>20</modifier>
+			<traits>
+				<trait>finesse</trait>
+				<trait>reach 15 feed</trait>
+			</traits>
+			<results>
+				<damage>
+					<dice>2d12+10</dice>
+					<type>bludgeoning</type>
+				</damage>
+				<effect>push 10 feet</effect>
+			</results>
+		</attack>
+		<attack>
+			<type>ranged</type>
+			<count>1</count>
+			<name>lightning lash</name>
+			<modifier>20</modifier>
+			<traits>
+				<trait>range increment 50 feet</trait>
+			</traits>
+			<results>
+				<damage>
+					<dice>2d12+4</dice>
+					<type>electricity</type>
+				</damage>
+			</results>
+		</attack>
+	</actions>
+	<spells>
+	</spells>
+	<onturn>
+		<feat>
+			<name>Swiftness</name>
+			<count>passive</count>
+			<description>
+				Kimgrathl&rsquo;s movement doesn&rsquo;t trigger reactions
+			</description>
+			<traits>
+			</traits>
+		</feat>
+	</onturn>
+</p2emon>

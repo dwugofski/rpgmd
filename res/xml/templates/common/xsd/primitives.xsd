@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+	xmlns='https://github.com/dwugofski/p2e'
+	targetNamespace='https://github.com/dwugofski/p2e'
+	elementFormDefault='qualified'
+	attributeFormDefault="unqualified">
+
+	<!-- Should use xsd:include elements for common type definitions of p2e items -->
+
+	<!--
+	============================================================================
+	PRIMITIVE TYPES
+	============================================================================
+
+	INCLUDE-ONLY
+
+	Commonly-used simple types
+	-->
+
+	<xs:simpleType name="lower">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				Lowercase text. Usually used for elements where capitalization is handled by the application.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:pattern value="([^A-Z]+)"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="id_string">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				String used as the ID of a P2E object.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="lower">
+			<xs:pattern value="([a-z_][a-z0-9_]+)"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="name">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				The display name of an item.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token"/>
+	</xs:simpleType>
+
+	<xs:simpleType name="int">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				An integer value.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+
+	<xs:simpleType name="decimal">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				An decimal value.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+
+</xs:schema>

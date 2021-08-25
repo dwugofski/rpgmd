@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<p2emon id="example_monster"
+	xmlns="https://github.com/dwugofski/p2e_mons"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://github.com/dwugofski/p2e_mons p2emon.xsd">
+	
+	<name>Creature Name</name>
+	<level>-1</level>
+	<rarity>uncommon</rarity>
+	<alignment>cn</alignment>
+	<size>medium</size>
+	<types>
+		<type>undead</type>
+	</types>
+	<traits>
+		<trait>other traits</trait>
+	</traits>
+	<perception>
+		<base>18</base>
+		<modifier>+23 when specified</modifier>
+		<traits>
+			<trait>darkvision 120 feet</trait>
+		</traits>
+	</perception>
+	<languages>
+		<language>The languages for a typical creature of that kind are listed here, followed by any special communication abilities. If a creature lacks this entry, it cannot communicate with or understand another creature through language.</language>
+	</languages>
+	<skills>
+		<skill>
+			<name>athletics</name>
+			<base>10</base>
+			<modifier>+20 when in forest</modifier>
+		</skill>
+		<skill>
+			<name>intimidation</name>
+			<base>10</base>
+		</skill>
+		<skill>
+			<name>stealth</name>
+			<base>17</base>
+			<modifier>+20 when in forest</modifier>
+		</skill>
+	</skills>
+	<abilities>
+      	<strength><base>0</base></strength>
+		<dexterity><base>-2</base></dexterity>
+		<constitution><base>8</base></constitution>
+		<intelligence><base>3</base></intelligence>
+		<wisdom><base>0</base></wisdom>
+		<charisma><base>1</base></charisma>
+	</abilities>
+	<items>
+		<item>Any significant gear the creature carries is listed here.</item>
+	</items>
+	<interactions>
+		<feat>
+			<name>Interaction Abilities</name>
+			<count>passive</count>
+			<description>Special abilities that affect how a creature perceives and interacts with the world are listed here.</description>
+		</feat>
+	</interactions>
+	<armor>
+		<base>0</base>
+		<modifier>2 with shield raised</modifier>
+	</armor>
+	<saves>
+		<fortitude>
+			<base>10</base>
+			<modifier>+2 under special cases</modifier>
+		</fortitude>
+		<reflex>
+			<base>10</base>
+		</reflex>
+		<will>
+			<base>10</base>
+		</will>
+		<modifier>+1 under super special circumstances</modifier>
+	</saves>
+	<hitpoints>
+		<base>9001</base>
+		<modifier>+10 for being awesome</modifier>
+	</hitpoints>
+	<immunities>
+		<immunity>poison</immunity>
+		<immunity>deafened</immunity>
+	</immunities>
+	<weaknesses>
+		<weakness>
+			<name>fire</name>
+			<base>10</base>
+		</weakness>
+		<weakness>
+			<name>mental</name>
+			<base>100</base>
+			<modifier>when you smile</modifier>
+		</weakness>
+	</weaknesses>
+	<resistances>
+		<resistance>
+			<name>cold</name>
+			<base>5</base>
+		</resistance>
+	</resistances>
+	<offturn>
+		<feat>
+			<name>Automatic Ability</name>
+			<count>passive</count> <!-- 0: free, 1: action, >=2: activity, reaction: reaction, passive: no action -->
+			<description>The creature’s auras, any abilities that automatically affect its defenses, and the like are listed here.</description>
+            <traits></traits>
+		</feat>
+		<feat>
+			<name>Reactive Ability</name>
+			<count>reaction</count>
+			<description>Free actions or reactions that are usually triggered when it’s not the creature’s turn are listed here. Descriptions can contain <b>bold</b> text.</description>
+            <traits></traits>
+		</feat>
+	</offturn>
+	<speeds> <!-- defaults to feet -->
+		<units>feet</units>
+		<speed>
+			<name>land</name>
+			<base>30</base>
+		</speed>
+		<speed>
+			<name>climb</name>
+			<base>40</base>
+			<modifier>when hulking</modifier>
+		</speed>
+		<speed>
+			<name>fly</name>
+			<base>720</base>
+			<units>inches</units>
+		</speed>
+	</speeds>
+	<actions>
+		<attack>
+			<type>melee</type>
+			<count>1</count>
+			<name>the name of the attack</name>
+			<modifier>20</modifier>
+			<traits>
+				<trait>reach 10 feet</trait>
+				<trait>sweep</trait>
+			</traits>
+			<results>
+				<damage>
+					<dice>67</dice>
+					<type>slashing</type>
+				</damage>
+				<damage>
+					<dice>1d4</dice>
+					<type>fire</type>
+				</damage>
+				<effect>effect name</effect>
+			</results>
+		</attack>
+		<attack>
+			<type>ranged</type>
+			<count>2</count>
+			<name>shoot</name>
+			<modifier>14</modifier>
+			<traits>
+				<trait>deadly 1d10</trait>
+			</traits>
+			<results>
+				<damage>
+					<dice>2d8+4</dice>
+					<type>slashing</type>
+				</damage>
+			</results>
+		</attack>
+	</actions>
+	<spells>
+		<spelllist>
+			<tradition>divine</tradition>
+			<type>spontaneous</type>
+			<difficulty>29</difficulty>
+			<attack><base>21</base></attack>
+			<group>
+				<level>2</level> <!-- 1-10, cantrip, continuous -->
+				<slots>4</slots>
+				<spell><name>illusory creature</name></spell>
+				<spell><name>invisibility</name></spell>
+				<spell><name>magic missile</name></spell>
+			</group>
+			<group>
+				<level>1</level>
+				<slots>4</slots>
+				<spell><name>feather fall</name></spell>
+				<spell><name>illusory object</name></spell>
+				<spell><name>longstrider</name></spell>
+			</group>
+			<group>
+				<level>cantrip</level>
+				<height>4</height>
+				<spell><name>daze</name></spell>
+			</group>
+		</spelllist>
+		<spelllist>
+			<tradition>occult</tradition>
+			<type>innate</type>
+			<difficulty>25</difficulty>
+			<group>
+				<level>continuous</level>
+				<spell><name>mind reading</name></spell>
+			</group>
+		</spelllist>
+		<spelllist>
+			<tradition>divine</tradition>
+			<type>ritual</type>
+			<difficulty>37</difficulty>
+			<group>
+				<level>continuous</level>
+				<spell><name>planar ally</name></spell>
+			</group>
+		</spelllist>
+		<spelllist>
+			<tradition>arcane</tradition>
+			<type>focus</type>
+			<difficulty>37</difficulty>
+			<group>
+				<level>continuous</level>
+				<spell><name>planar ally</name></spell>
+			</group>
+		</spelllist>
+	</spells>
+	<onturn>
+		<feat>
+			<name>Flying Strafe</name>
+			<count>2</count>
+			<description>Description of the action taken</description>
+		</feat>
+		<feat>
+			<name>Earth Glide</name>
+			<count>passive</count>
+			<description>The grikkitog can Burrow through dirt and stone.</description>
+			<traits>
+				<trait>move</trait>
+				<trait>occult</trait>
+			</traits>
+		</feat>
+	</onturn>
+</p2emon>

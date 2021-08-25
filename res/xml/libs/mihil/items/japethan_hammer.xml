@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE xml[
+<!ENTITY ndash '&#8211;'>
+<!ENTITY mdash '&#8212;'>
+<!ENTITY lsquo "&#8216;">
+<!ENTITY rsquo "&#8217;">
+<!ENTITY ldquo '&#8220;'>
+<!ENTITY rdquo '&#8221;'>
+<!ENTITY amp '&#38;'>
+]>
+<item
+	id="japethan_hammer"
+	xmlns="https://github.com/dwugofski/p2e" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="../../../templates/items/item.xsd">
+
+	<name>Japethan Hammer</name>
+	<level>7</level>
+	<traits>
+		<trait type="rarity">unique</trait>
+		<trait type="equipment">intelligent</trait>
+		<trait type="school">evocation</trait>
+		<trait type="general">magical</trait>
+	</traits>
+	<price>
+		<int>3250</int>
+		<money>gp</money>
+	</price>
+	<usage>
+		<held>1</held>
+	</usage>
+	<bulk>1</bulk>
+	<description>
+		<p>A legendary weapon destined to be held by a champion of Nibarell, the Japethan Hammer is a work of wonder crafted by the god of craftsmen himself. It is a sophisticated yet durable contraption, decorated with ornate motifs blending the styles of dwarven and elvish design, much like most crafts associated with Nibarell and his worshippers.</p>
+		<p>This weapon is a +1 magical weapon which can be used as either a sickle or a hammer. In either form, the weapon&rsquo;s damage die is 1d8, though the type of damage depends on the form (slashing for the sickle and bludgeoning for the hammer).</p>
+		<p>Additionally, the Japethan Hammer contains the consciousness of Japethan, the legendary advisor to Nibarell. Consulting with Japethan bestows a +3 item bonus to checks involving his areas of expertise, which are mainly Crafting, Dwarven Lore, and Nibarell Lore. Japethan himself is an absent-minded old man, only half occupying the hammer and half consulting with business in Nibarell.</p>
+		<activate>
+			<action>
+				<act_count>1</act_count>
+				<name>Interact</name>
+			</action>
+			<effect>
+				<p>Switch the form of the weapon between a hammer and a sickle. In either form, the weapon&rsquo;s damage die is 1d8, though the type of damage depends on the form (slashing for the sickle and bludgeoning for the hammer).</p>
+			</effect>
+		</activate>
+	</description>
+</item>

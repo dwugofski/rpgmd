@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE xml[
+<!ENTITY rsquo "&#8217;">
+<!ENTITY lsquo "'">
+<!ENTITY rdquo '"'>
+<!ENTITY ldquo '"'>
+]>
+<item
+	id="mountainheart_shield"
+	xmlns="https://github.com/dwugofski/p2e" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://github.com/dwugofski/p2e item.xsd">
+
+	<name>Mountainheart Shield</name>
+	<level>var</level>
+	<traits>
+		<trait type="rarity">unique</trait>
+		<trait type="school">abjuration</trait>
+		<trait type="general">magical</trait>
+	</traits>
+	<usage>
+		<held>1</held>
+	</usage>
+	<bulk>1</bulk>
+	<description>
+		<p>Etched with the carvings of a Mountainheart clan&#8217;s insignia, the superior design and craftsmanship of this steel shield obviates its magically-enhanced Hardness. This shield bears the pride and honor of its clan, who wanted to make it hard to break or destroy.</p>
+		<p>In the shield are three inset depressions. Three other magical artifacts can be combined with this artifact to increase its power. Each additional atifact boosts this shield&rsquo;s power, but all three are required to fully actualize its capabilities. With each new artifact, the shield moves to the next tier of use. In addition to increasing the potency of the shield, each additional artifact bestows a special effect on the shield:</p>
+		<ul>
+			<li>
+				<p><strong>Top Rectangular U-Shaped Depression:</strong> The shield vibrates with a faint hum, detectable only to you. When raised, you gain the shield&#8217;s circumstance bonus to saving throws against spells that target you (as well as to your AC).</p>
+			</li>
+			<li>
+				<p><strong>Central Diamond Depression:</strong> The central face of the shield is filled with a flat diamond gem, with a flaw in the center resembling the Mountainheart insignia. When attached to the shield, it functions as a <em>+1 striking shield boss</em> that can&#8217;t be removed from the shield.</p>
+				<activate>
+					<action>
+						<act_count>1</act_count>
+						<name>Raise a Shield</name>
+					</action>
+					<frequency>
+						once per day
+					</frequency>
+					<effect>
+						<p>The ruby material animates, becoming a rippling fluid which remains attached to the central depression of the shield. You Raise the Shield and make a melee Strike with it as part of the same action. The ruby material forms a mass of conical spikes and becomes a martial melee weapon that deals 2d6 piercing damage and has the deadly 1d6 trait; it cannot be enhanced by runes. The shield remains animated for 1 minute, during which time you can Strike with it each time you Raise the Shield, as well as with a Strike action.</p>
+					</effect>
+				</activate>
+			</li>
+			<li>
+				<p><strong>Bottom Flowing Carving Depression:</strong></p>
+				<activate>
+					<action>
+						<act_count>reaction</act_count>
+						<name>Interact</name>
+						<trigger>A ranged weapon Strike targets a creature within 15 feet of you when you have this shield raised, and the attacker has not yet rolled their attack</trigger>
+					</action>
+					<effect>
+						<p>The triggering Strike targets you instead of its normal target. If it hits, you gain the effects of the Shield Block reaction.</p>
+					</effect>
+				</activate>
+			</li>
+		</ul>
+	</description>
+	<variants>
+		<variant>
+			<type>no artifacts</type>
+			<level>4</level>
+			<price>
+				<int>100</int>
+				<money>gp</money>
+			</price>
+			<description>
+				<p>This shield has Hardness 10, HP 80, and BT 32.</p>
+			</description>
+		</variant>
+		<variant>
+			<type>1 artifact</type>
+			<level>7</level>
+			<price>
+				<int>360</int>
+				<money>gp</money>
+			</price>
+			<description>
+				<p>This shield has Hardness 10, HP 80, and BT 40.</p>
+			</description>
+		</variant>
+		<variant>
+			<type>2 artifacts</type>
+			<level>13</level>
+			<price>
+				<int>3000</int>
+				<money>gp</money>
+			</price>
+			<description>
+				<p>This shield has Hardness 15, HP 120, and BT 60.</p>
+			</description>
+		</variant>
+		<variant>
+			<type>3 artifacts</type>
+			<level>19</level>
+			<price>
+				<int>40000</int>
+				<money>gp</money>
+			</price>
+			<description>
+				<p>This shield has Hardness 20, HP 160, and can withstand just about any damage. It can only be destroyed by a <link type="spell" ref="disintegrate">disintegrate</link> spell (roll damage as if against a creature that failed its save) or by an artifact tied to destruction, such as a <link type="item" ref="sphere_of_annihilation">sphere of annihilation</link>.</p>
+			</description>
+		</variant>
+	</variants>
+</item>

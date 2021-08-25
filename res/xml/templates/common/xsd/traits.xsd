@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+	xmlns='https://github.com/dwugofski/p2e'
+	targetNamespace='https://github.com/dwugofski/p2e'
+	elementFormDefault='qualified'
+	attributeFormDefault="unqualified">
+
+	<xs:include schemaLocation="./primitives.xsd"/>
+
+	<!--
+	============================================================================
+	TRAIT TYPE
+	============================================================================
+
+	INCLUDE-ONLY
+
+	Type to outline a trait that a P2E entity has
+	-->
+
+	<xs:complexType name="traits">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				A list of traits for a P2E entity.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="trait" type="trait"/>
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="trait">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				A trait for a P2E entity.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="lower">
+				<xs:attribute name="type" type="lower">
+					<xs:annotation>
+						<xs:documentation xml:lang="en">
+							The type of trait this is. If unspecified, the type will be auto-selected.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+</xs:schema>
