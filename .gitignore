@@ -135,6 +135,7 @@ dmypy.json
 *.scss.map
 
 # Ignore temp files
+tmp/
 *.tmp
 
 # Ignore image resources (should not be stored on github)
