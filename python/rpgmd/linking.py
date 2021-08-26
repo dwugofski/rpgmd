@@ -17,6 +17,23 @@ class AnchorMacro(Macro):
 
 	TAG = 'a'
 
+	@staticmethod
+	def makeMacro(anchor, anchor_text, *init_args, **init_kwargs):
+		'''Make an import macro from the provided details
+
+		Args:
+			- anchor (str): The ID of the anchor to use
+			- anchor_text (str|None): The text to use to display this anchor.
+				if None, no text will be used
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		attrs = [title, anchor_text]
+		macro_text = Macro.makeMacroText(AnchorMacro.TAG, attrs)
+		return AnchorMacro(macro_text, *init_args, **init_kwargs)
+
 	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
 		'''Create a macro object from the text containing it.
 
@@ -89,7 +106,23 @@ class NamespaceMacro(ImportMacro):
 
 	TAG = 'namespace'
 
-	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
+	@staticmethod
+	def makeMacro(module_name, module_path, *init_args, **init_kwargs):
+		'''Make an import macro from the provided details
+
+		Args:
+			- module_name (str): The alias of the document to import
+			- module_path (str): The path to the document
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		attrs = [module_name, module_path]
+		macro_text = Macro.makeMacroText(NamespaceMacro.TAG, attrs)
+		return NamespaceMacro(macro_text, *init_args, **init_kwargs)
+
+	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc, compiled=False):
 		'''Create a macro object from the text containing it.
 
 		Format:
@@ -106,6 +139,8 @@ class NamespaceMacro(ImportMacro):
 			- endline (int): The line the macro ends on
 			- endcolumn (int): The character index the macro ends on
 			- doc (Document): The document object defining the macro
+			- [compiled=False (bool)]: Whether this containing document needs to
+				be recompiled if the imported file is changed
 
 		Raise:
 			- ValueError:
@@ -115,7 +150,7 @@ class NamespaceMacro(ImportMacro):
 		'''
 
 		# Build off of base class
-		super(NamespaceMacro, self).__init__(text, startline, startcolumn, endline, endcolumn, doc)
+		super(NamespaceMacro, self).__init__(text, startline, startcolumn, endline, endcolumn, doc, compiled=compiled)
 
 		# Get the path to the import as a relative path from the defining document
 		self._relpath = Path(os.path.relpath(Path(self.path), Path(doc.filepath)))
@@ -154,6 +189,24 @@ class LinkMacro(Macro):
 	'''
 
 	TAG = 'l'
+
+	@staticmethod
+	def makeMacro(namespace, anchor, anchor_text, *init_args, **init_kwargs):
+		'''Make an import macro from the provided details
+
+		Args:
+			- namespace (str|None): The name of the rpgmd document to link to.
+				If None, the anchor will be given without a namespace qualifier.
+			- anchor (str): The ID of the anchor to use
+			- anchor_text (str): The text to use to display this anchor
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		attrs = [namespace + "::" + anchor if not namespace is None else anchor, module_path]
+		macro_text = Macro.makeMacroText(LinkMacro.TAG, attrs)
+		return LinkMacro(macro_text, *init_args, **init_kwargs)
 
 	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
 		'''Create a macro object from the text containing it.

@@ -75,6 +75,27 @@ class Macro(object):
 	CLOSING_SEQUENCE = "]]"
 	DELIMITER = "|"
 
+	@staticmethod
+	def makeMacroText(tag, attrs):
+		'''Create the description text for a macro
+
+		Args:
+			- tag (str): The string of the tag to make the text for
+			- attrs (list<str>): The attribute text for each attribute of the
+				macro
+		'''
+		# Set the opening sequence and tag
+		output = Macro.OPENING_SEQUENCE + tag
+
+		# Add the attributes, separating by delimiter
+		for attr in attrs:
+			if attr is None:
+				continue
+			output += Macro.DELIMITER + attr
+
+		# Return the tag + attributes list with the closing sequence
+		return output + Macro.CLOSING_SEQUENCE
+
 	def locStr(self):
 		'''Get the string description of the macro's file and lcoation therein
 
@@ -183,6 +204,7 @@ class Document(object):
 		- macros (list[Macro]): The list of the document's macros
 		- imports (dict{str:ImportMacro}): Dictionary mapping import name to the
 			related import macro
+		- file_macro (FileMacro): The file description macro for the document
 	'''
 
 	def __init__(self, filepath):
@@ -203,6 +225,25 @@ class Document(object):
 		self.macros = []
 		self.imports = {}
 		self.file_macro = None
+
+	def addMacro(self, new_macro):
+		'''Add a macro to this document's macro lists
+
+		Args:
+			- new_macro (Macro): The macro to add
+		'''
+		self.macros.append(new_macro)
+
+		# Track with special macro containers
+		if isinstance(new_macro, ImportMacro):
+			# Add import macros
+			self.imports[new_macro.alias] = new_macro
+		if isinstance(new_macro, FileMacro):
+			# add file detail macro
+			if not self.file_macro is None:
+				raise ValueError("Duplicate file macro found\n{0:s}".format(new_macro.locStr()))
+			else:
+				self.file_macro = new_macro
 
 	def parse(self):
 		'''Extract the macros from a document
@@ -275,25 +316,11 @@ class Document(object):
 							# Create the macro object and add it to the list
 							logging.debug('Creating macro with tag "{0:s}" and text\n{1:s}'.format(tag, macrotext))
 							new_macro = _MacroClasses[tag](macrotext, macroline, macrocolumn, linenum, column, self)
-							self.macros.append(new_macro)
-
-							# Track with special macro containers
-							if isinstance(new_macro, ImportMacro):
-								# Add import macros
-								self.imports[new_macro.alias] = new_macro
-							if isinstance(new_macro, FileMacro):
-								# add file detail macro
-								if not self.file_macro is None:
-									raise ValueError("Duplicate file macro found\n{0:s}".format(new_macro.locStr()))
-								else:
-									self.file_macro = new_macro
+							self.addMacro(new_macro)
 
 							# Close our consideration and continue reading the line
 							opened = False
 							continue
-
-		# Sort the macros
-		self.macros.sort(key=lambda mac:mac.span())
 
 		# Ensure we found a file macro for the document
 		if self.file_macro is None:
@@ -361,6 +388,9 @@ class Document(object):
 				Options include
 				- 'web': A web HTML document
 		'''
+		# Sort the macros to ensure they are output in order
+		self.macros.sort(key=lambda mac:mac.span())
+
 		# Get the source and output files as pathlib paths
 		srcfile = Path(self.filepath)
 		tmpfile = Path(tmpfile)
@@ -464,6 +494,22 @@ class ImportMacro(Macro):
 
 	TAG = 'import'
 
+	@staticmethod
+	def makeMacro(import_name, import_path, *init_args, **init_kwargs):
+		'''Make an import macro from the provided details
+
+		Args:
+			- import_name (str): The alias used by the import
+			- import_path (str|Path): The path to the file to import
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		attrs = [import_name, import_path]
+		macro_text = Macro.makeMacroText(ImportMacro.TAG, attrs)
+		return ImportMacro(macro_text, *init_args, **init_kwargs)
+
 	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc, compiled=False):
 		'''Create a macro object from the text containing it.
 
@@ -506,7 +552,7 @@ class ImportMacro(Macro):
 		self.alias = self.attrs[0]
 
 		# Get the absolute path to the file (may through FileNotFoundError)
-		self.path = str(Path(doc.filepath).joinpath(Path(self.attrs[1])).resolve())
+		self.path = str(Path(doc.filepath).parent.joinpath(Path(self.attrs[1])).resolve())
 
 	# def compile(self): # Inherit from Macro
 
@@ -515,29 +561,34 @@ class ImportMacro(Macro):
 class FileMacro(Macro):
 	'''Macro to handle the details of a document file
 
-	Format:
-		title | [author]
-	Where
-		- title (str): The title to display for this document
-		- author (str): The author for this document
-
 	Attributes:
 		- title (str): The title for this file
-		- author (str|None): The author for this file (None if no author is
-			specified)
 	'''
 
 	TAG = 'file'
+
+	@staticmethod
+	def makeMacro(title, *init_args, **init_kwargs):
+		'''Make an import macro from the provided details
+
+		Args:
+			- title (str): The title to display for this document
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		attrs = [title]
+		macro_text = Macro.makeMacroText(FileMacro.TAG, attrs)
+		return FileMacro(macro_text, *init_args, **init_kwargs)
 
 	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
 		'''Create a macro object from the text containing it.
 
 		Format:
-			import_name | import_path
+			title
 		Where
-			- import_name (str): The string id of the import
-			- import_path (str): The path to the file to import. Relative paths
-				are evaluated relative to the source document
+			- title (str): The title to display for this document
 
 		Args:
 			- text (str): The text (including the containing characters) for the
@@ -565,9 +616,6 @@ class FileMacro(Macro):
 
 		# Set the title
 		self.title = self.attrs[0]
-
-		# Set the author
-		self.author = self.attrs[1] if len(self.attrs) > 1 else None
 
 	# def compile(self): # Inherit from Macro
 
