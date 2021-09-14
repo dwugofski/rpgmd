@@ -108,7 +108,7 @@ class IndexMacro(FileMacro):
 			output = ''
 			# Only output the title if we are at max depth
 			if depth == 0:
-				output += '<div class="index"><h1>{0:s}</h1>'.format(self.title)
+				output += '<div class="index"><h1>Index</h1>'
 
 			# Create the unordered list for the indexed items
 			output += '<ul class="index">'

@@ -5,4 +5,6 @@
 [[css|web|../css/npc.css]]
 [[css|web|../css/toc_index.css]]
 
+Here we can have a description before the index
+
 [[index|Main|./test.md,./foobar/findex.md]]
