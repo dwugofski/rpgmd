@@ -1,6 +1,7 @@
 # Core components
 
 import os, re, logging, inspect
+import validators
 
 from pathlib import Path
 from contextlib import contextmanager
@@ -83,6 +84,9 @@ class Macro(object):
 			- tag (str): The string of the tag to make the text for
 			- attrs (list<str>): The attribute text for each attribute of the
 				macro
+
+		Return:
+			- str: The text that would make the given macro
 		'''
 		# Set the opening sequence and tag
 		output = Macro.OPENING_SEQUENCE + tag
@@ -90,11 +94,59 @@ class Macro(object):
 		# Add the attributes, separating by delimiter
 		for attr in attrs:
 			if attr is None:
-				continue
+				attr = ''
 			output += Macro.DELIMITER + attr
 
 		# Return the tag + attributes list with the closing sequence
 		return output + Macro.CLOSING_SEQUENCE
+
+	@staticmethod
+	def getPathOrLink(teststr):
+		'''Check if a provided string is a path link or a web link
+
+		Args:
+			- teststr (str): The path or web link to check
+
+		Return:
+			- Path: The path for the given text
+			- str: The web link
+		'''
+		if not validators.url(teststr) and not validators.url('http://' + teststr):
+			return Path(teststr)
+		else:
+			return teststr
+
+	@staticmethod
+	def extractListString(csv_str, trim=True, drop_empty=True, delimiter=','):
+		'''Extract a list from a list string (e.g. a comma-separated-value list)
+
+		Args:
+			- csv_str (str): The list string to use
+			- trim=True (bool): Whether to trim whitespace from the start/end of
+				each item in the list string
+			- drop_empty=True (bool): Whether to drop empty strings from the
+				output list
+			- delimiter=',' (str): The delimiter to use for the values
+
+		Return:
+			- list<str>: The list of the items in the list string
+		'''
+		ret = []
+		item_p = re.compile(r"[\s]*(.*[^\s])[\s]*", re.DOTALL | re.MULTILINE) # Regex to extract the non-whitespace part of the item
+		for item in csv_str.split(delimiter):
+			# Trim the whitespace from beginning / end
+			if trim:
+				item_m = item_p.match(item)
+				if item_m:
+					item = item_m.group(1)
+				else:
+					item = ''
+
+			# Add the item to the list
+			if not item == '' or not drop_empty:
+				ret.append(item)
+
+		return ret
 
 	def locStr(self):
 		'''Get the string description of the macro's file and lcoation therein
@@ -135,7 +187,7 @@ class Macro(object):
 				attribute
 		'''
 		# Trimming pattern for an attribute
-		attr_pattern = re.compile(r"^\s*(.+?)\s*$", re.DOTALL | re.MULTILINE)
+		attr_pattern = re.compile(r"[\s]*(.*[^\s])[\s]*$", re.DOTALL | re.MULTILINE)
 
 		# Keep track of file position for debug info
 		self._text = text
@@ -155,8 +207,6 @@ class Macro(object):
 		self.attrs = []
 		self.tag = None
 		for attr in text.split(Macro.DELIMITER):
-			# Collapse whitespace
-			attr = re.sub(r"\s+", " ", attr)
 			# Trim the attribute text
 			attr_match = attr_pattern.match(attr)
 			if attr_match:
@@ -166,9 +216,9 @@ class Macro(object):
 				else:
 					self.attrs.append(attr_match.group(1))
 			else:
-				# If not, we should produce an error
-				raise MacroError(ValueError, 'Cannot parse macro attribute "{0:s}"\n{1:s}'.format(
-					attr, self.locStr()))
+				# If not, we should just add an empty string (as that meant the item was just white space)
+				logging.info('Empty macro attribute string "{0:s}" found in "{1:s}"'.format(attr, self.locStr()))
+				self.attrs.append('')
 
 		logging.debug('Created macro with tag "{0:s}" and the following attributes: {1:s}'.format(str(self.tag), str(self.attrs)))
 
@@ -388,6 +438,9 @@ class Document(object):
 				Options include
 				- 'web': A web HTML document
 		'''
+
+		logging.info('Compiling document from file "{0:s}"'.format(self.filepath))
+
 		# Sort the macros to ensure they are output in order
 		self.macros.sort(key=lambda mac:mac.span())
 
@@ -430,7 +483,7 @@ class Document(object):
 							outf.write(line[column:mcolumn])
 
 							# Compile the macro and output it, then progress to "skipping macro"
-							if macro.iscompileable():
+							if macro.iscompileable() and not isinstance(macro, HeaderMacro):
 								outf.write(macro.compile())
 							at_macro = True
 							continue
@@ -455,9 +508,30 @@ class Document(object):
 							mline, mcolumn, meline, mecolumn = self.macros[macroi].span()
 
 		# Convert the temp file into the output file
-		html_code = mdconvert(str(tmpfile))
-		with open(outfile, 'w') as outf:
-			outf.write(html_code)
+		if profile == 'web':
+			# Get the format for the HTML file
+			html_format = ''
+			with open(Path(__file__).parent.joinpath('format.html'), 'r') as ffile:
+				html_format = ffile.read()
+
+			# Get the header details
+			html_header = ''
+			for macro in self.macros:
+				if isinstance(macro, HeaderMacro) and macro.iscompileable():
+					html_header += macro.compile(profile)
+
+			# Make the Title
+			html_title = ''
+			if self.file_macro.title:
+				html_header += '<title>{0:s}</title>'.format(self.file_macro.title)
+				html_title = '<div id="title">{0:s}</div>'.format(self.file_macro.title)
+
+			# Get the body
+			html_body = mdconvert(str(tmpfile))
+
+			# Write out the code
+			with open(outfile, 'w') as outf:
+				outf.write(html_format.format(html_header, html_title, html_body))
 
 	@contextmanager
 	def open(self):
@@ -624,3 +698,110 @@ class FileMacro(Macro):
 # Add the import and file detail macros
 addMacroClass(ImportMacro)
 addMacroClass(FileMacro)
+
+class HeaderMacro(Macro):
+	'''Passthrough macro to differentiate from macros meant to be compiled in
+	the body
+	'''
+
+class CSSMacro(HeaderMacro):
+	'''Macro to handle the details of a document file
+
+	Attributes:
+		- profiles (list<str>): The profiles for which this CSS file should be
+			included
+		- file (Path): The path to the css file to import
+	'''
+	TAG = 'css'
+
+	@staticmethod
+	def makeMacro(profiles, file, *init_args, **init_kwargs):
+		'''Make a css macro from the provided details
+
+		Args:	
+			- profiles (list<str>): The profiles for which this CSS file should
+				be included
+			- file (str|Path): The relative path to the css file to import
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		# Get the profiles as a string
+		profs = ''
+		for profile in profiles:
+			profs += profile + ','
+		# Make the macro
+		attrs = [profs[:-1], str(file)]
+		macro_text = Macro.makeMacroText(CSSMacro.TAG, attrs)
+		return CSSMacro(macro_text, *init_args, **init_kwargs)
+
+	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
+		'''Create a macro object from the text containing it.
+
+		Format:
+			profiles | file
+		Where
+			- profiles (str): A comma-separated-value list of profiles to
+				include this macro for
+			- file (str): The relative path to the css file to import
+
+		Args:
+			- text (str): The text (including the containing characters) for the
+				macro
+			- startline (int): The line the macro starts on
+			- startcolumn (int): The character index the macro starts on
+			- endline (int): The line the macro ends on
+			- endcolumn (int): The character index the macro ends on
+			- doc (Document): The document object defining the macro
+
+		Raise:
+			- ValueError:
+				- The macro spec string contains a badly-formatted attribute
+				- Not enough attributes were provided to the macro
+		'''
+
+		# The Macro superclass will parse all of the attributes
+		super(CSSMacro, self).__init__(text, startline, startcolumn, endline, endcolumn, doc)
+
+		# Check to make sure we have enough attributes
+		if len(self.attrs) < 2:
+			raise MacroError(ValueError, 'CSS macro does not have enough attributes, only has {0:d} attributes'.format(
+				len(self.attrs)))
+
+		# Get the profiles
+		self.profiles = Macro.extractListString(self.attrs[0])
+
+		# Set the file
+		self.file = Path(self.attrs[1])
+
+	def compile(self, profile='web'):
+		'''Prototype method for compiling a macro into markdown / HTML
+
+		Args:
+			- profile='web' (str): The compiling profile for the macro. Options
+				are listed in the Document.compile documentation
+
+		Raise:
+			- NotImplementedError:
+				- The compiling profile is not supported
+		'''
+		if profile in self.profiles:
+			if profile == 'web':
+				return '<link rel="stylesheet" href="{0:s}"/>'.format(str(self.file.as_posix()))
+			else:
+				raise MacroError(NotImplementedError, 'CSS macro does not support "{0:s}" profile'.format(profile))
+		else:
+			return ''
+
+	def iscompileable(self):
+		'''Protoype method for compiling a macro into markdown / HTML
+
+		Return:
+			'True' if the macro can be compiled, otherwise 'False'. For this
+			class, always return 'True'
+		'''
+		return True
+
+# Add the CSS macro
+addMacroClass(CSSMacro)

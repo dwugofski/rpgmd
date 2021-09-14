@@ -262,13 +262,13 @@ body #main h6 {
 	margin-top: 0;
 }
 
-body #main .img_holder {
+body #main .img_container {
 	margin-bottom: 1em;
 	padding: 0;
 	width: 100%;
 }
 
-body #main .img_holder img {
+body #main .img_container img {
 	border: 0.2em solid var(--accent);
 	box-sizing: border-box;
 	display: block;
@@ -276,11 +276,11 @@ body #main .img_holder img {
 	max-width: 100%;
 	max-height: 50em;
 }
-body #main .img_holder.borderless img {
+body #main .img_container.borderless img {
 	border-style: none;
 }
 
-body #main .img_holder .caption {
+body #main .img_container .caption {
 	font-family: var(--note-font);
 	font-style: italic;
 	margin: 0;

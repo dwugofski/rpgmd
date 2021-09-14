@@ -1,5 +1,7 @@
 # Macros to handle a directory index
 
+import logging
+
 from .core import *
 from .linking import NamespaceMacro
 
@@ -88,13 +90,15 @@ class IndexMacro(FileMacro):
 			doc.addMacro(new_macro)
 			self.items.append(new_macro)
 
-	def compile(self, profile='web', depth=0):
+	def compile(self, profile='web', depth=0, path_prefix=Path('.')):
 		'''Prototype method for compiling a macro into markdown / HTML
 
 		Args:
 			- profile='web' (str): The compiling profile for the macro. Options
 				are listed in the Document.compile documentation
 			- depth=0 (int): The recursive depth down we have gone in indexing
+			- path_prefix=Path('.') (Path): The prefix to prepend to all paths
+				output from this function (used for recursive linking)
 
 		Raise:
 			- NotImplementedError:
@@ -119,12 +123,12 @@ class IndexMacro(FileMacro):
 					# Need to get the file info for the item
 					finfo = doc.file_macro
 					# Add in the title
-					output += '<a href="{0:s}">{1:s}</a>'.format(link_path, finfo.title)
+					output += '<a href="{0:s}">{1:s}</a>'.format(str(path_prefix.joinpath(link_path)), finfo.title)
 					if isinstance(finfo, IndexMacro) and depth < 4:
-						output += finfo.compile(profile='web', depth=depth+1)
+						output += finfo.compile(profile='web', depth=depth+1, path_prefix=Path(link_path).parent)
 				except Exception as e:
 					# Rethrow (Document-based) exceptions with the information for this macro
-					raise MacroError(type(e), e.message)
+					raise MacroError(type(e), str(e))
 				output += '</li>'
 			output += '</ul>'
 

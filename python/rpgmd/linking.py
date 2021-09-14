@@ -1,6 +1,6 @@
 # Macros related to creating hypertext links
 
-import os, re
+import os, re, logging
 import urllib.parse
 
 from pathlib import Path
@@ -153,7 +153,7 @@ class NamespaceMacro(ImportMacro):
 		super(NamespaceMacro, self).__init__(text, startline, startcolumn, endline, endcolumn, doc, compiled=compiled)
 
 		# Get the path to the import as a relative path from the defining document
-		self._relpath = Path(os.path.relpath(Path(self.path), Path(doc.filepath)))
+		self._relpath = Path(os.path.relpath(Path(self.path), Path(doc.filepath).parent))
 
 	def getRelPath(self, profile='web'):
 		'''Get a text string version of the relative path to the desired output

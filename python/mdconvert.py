@@ -1,10 +1,10 @@
 
-import os, logging
+import os, logging, sys
 
 from pathlib import Path
 
 # Start logging
-logging.basicConfig(level=logging.DEBUG, format='%(levelname)-8s %(asctime)s\n{{%(filename)s[%(lineno)d] %(funcName)s}}\n%(message)s')
+logging.basicConfig(level=logging.INFO, format='%(levelname)-8s %(asctime)s\n{{%(filename)s[%(lineno)d] %(funcName)s}}\n%(message)s')
 
 # Now import rpgmd (need to log details from it)
 from rpgmd import Document
@@ -54,7 +54,7 @@ try:
 			tmppath = Path(tmp_dir).joinpath(root).joinpath(file).with_suffix(TMP_SUFFIX)
 			outpath = Path(html_dir).joinpath(root).joinpath(file).with_suffix(HTML_SUFFIX)
 
-			# Check if we need to compile (not used now)
+			# Check if we need to compile (not used now to validate macro builds)
 			# if not doc.needsCompiling(outpath):
 			# 	continue
 
