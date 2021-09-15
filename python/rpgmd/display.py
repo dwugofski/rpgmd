@@ -268,7 +268,7 @@ class TableMacro(Macro):
 		# Set the headers
 		self.headers = []
 		headers = Macro.extractListString(self.attrs[1], delimiter=';')
-		header_p = re.compile(r"[\s]*([0-9]*|\*)[\s]*,[\s]*(\*|[0-9]*)[\s]*", re.DOTALL | re.MULTILINE)
+		header_p = re.compile(r"[\s]*([0-9]+|\*)[\s]*,[\s]*([0-9]+|\*)[\s]*", re.DOTALL | re.MULTILINE)
 		for header in headers:
 			header_m = header_p.match(header)
 			if header_m:
