@@ -5,7 +5,7 @@
 [[css|web|../css/npc.css]]
 [[css|web|../css/toc_index.css]]
 
-[[file|Test File]]
+[[navbar|Test File|./index.md]]
 
 # This is a test
 

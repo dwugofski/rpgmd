@@ -369,3 +369,18 @@ body #main th {
 body #main .reward {
 	color: var(--green);
 }
+
+body #main .navbar .ilink {
+	width: 50%;
+	text-align: center;
+}
+
+body #main .navbar .fl.link {
+	width: 25%;
+	min-height:  1em;
+	text-align: left;
+}
+body #main .navbar .fr.link {
+	width: 25%;
+	text-align: right;
+}

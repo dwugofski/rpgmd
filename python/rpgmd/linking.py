@@ -102,6 +102,10 @@ addMacroClass(AnchorMacro)
 
 class NamespaceMacro(ImportMacro):
 	'''Macro to create an alias for an rpgmd document to import
+
+	Attributes:
+		- relpath (Path): The path to the item (Note: Use getRelPath to convert
+			this to a string for compiling)
 	'''
 
 	TAG = 'namespace'
@@ -112,13 +116,13 @@ class NamespaceMacro(ImportMacro):
 
 		Args:
 			- module_name (str): The alias of the document to import
-			- module_path (str): The path to the document
+			- module_path (str|Path): The path to the document
 			- *init_args (varargs): The arguments for the macro definition. See
 				the __init__ function for more details
 			- **init_kwargs (varargs): The keyword arguments for the macro
 				definition. See the __init__ function for more details
 		'''
-		attrs = [module_name, module_path]
+		attrs = [module_name, str(module_path)]
 		macro_text = Macro.makeMacroText(NamespaceMacro.TAG, attrs)
 		return NamespaceMacro(macro_text, *init_args, **init_kwargs)
 
@@ -153,7 +157,7 @@ class NamespaceMacro(ImportMacro):
 		super(NamespaceMacro, self).__init__(text, startline, startcolumn, endline, endcolumn, doc, compiled=compiled)
 
 		# Get the path to the import as a relative path from the defining document
-		self._relpath = Path(os.path.relpath(Path(self.path), Path(doc.filepath).parent))
+		self.relpath = Path(os.path.relpath(Path(self.path), Path(doc.filepath).parent))
 
 	def getRelPath(self, profile='web'):
 		'''Get a text string version of the relative path to the desired output
@@ -168,7 +172,7 @@ class NamespaceMacro(ImportMacro):
 				- The compiling profile is not supported
 		'''
 		if profile == 'web':
-			return str(self._relpath.with_suffix('.html').as_posix())
+			return str(self.relpath.with_suffix('.html').as_posix())
 		else:
 			raise MacroError(NotImplementedError, 'Namespace macro getRelPath does not support "{0:s}" profile'.format(profile))
 
@@ -276,7 +280,8 @@ class LinkMacro(Macro):
 				file_link = self._doc.imports[self.namespace].getRelPath(profile)
 
 			# Convert to URL string
-			file_link = urllib.parse.quote_plus(file_link + '#' + urllib.parse.quote_plus(self.anchor_id, safe=''), safe='/#')
+			# file_link = urllib.parse.quote_plus(file_link + '#' + urllib.parse.quote_plus(self.anchor_id, safe=''), safe='/#')
+			file_link = file_link + '#' + urllib.parse.quote(self.anchor_id, safe='')
 
 			# Output the link
 			return '<a href="{0:s}">{1:s}</a>'.format(file_link, self.text)

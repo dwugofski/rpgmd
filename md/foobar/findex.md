@@ -5,4 +5,4 @@
 [[css|web|../../css/npc.css]]
 [[css|web|../../css/toc_index.css]]
 
-[[index|Foo Index|./foobar.md]]
+[[index|Foo Index|./foobar.md|../index.md]]
