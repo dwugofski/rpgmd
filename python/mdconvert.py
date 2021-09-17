@@ -6,6 +6,7 @@ from pathlib import Path
 # Start logging
 logging.basicConfig(
 	filename='mdconvert.log',
+	filemode='w',
 	level=logging.DEBUG,
 	format='%(levelname)-8s %(asctime)s\n{{%(filename)s[%(lineno)d] %(funcName)s}}\n%(message)s')
 

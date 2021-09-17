@@ -1,4 +1,9 @@
 {
+	"cssdir": {
+		"type": "path",
+		"subtypes": ["dir", "abs"],
+		"value": "../css/"
+	},
 	"xmls": {
 		"type": "path",
 		"subtypes": ["dir", "abs"],
@@ -21,6 +26,14 @@
 	},
 	"footext": {
 		"type": "string",
-		"value": "FOOBAR"
+		"value": "{bartext}"
+	},
+	"bartext": {
+		"type": "string",
+		"value": "{foobartext}"
+	},
+	"foobartext": {
+		"type": "string",
+		"value": "{bartext}"
 	}
 }

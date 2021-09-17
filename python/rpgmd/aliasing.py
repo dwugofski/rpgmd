@@ -135,7 +135,7 @@ class ValAlias(object):
 		return _ValAliases[definition['type']](definition, file)
 
 	@staticmethod
-	def evaluateAliases(value, aliases):
+	def evaluateAliases(value, aliases, parents=None):
 		'''Parse a value string, replacing aliases with their desired values
 
 		Args:
@@ -143,6 +143,8 @@ class ValAlias(object):
 			- aliases (list<dict<str,ValAlias>>): The alias dictionaries to use.
 				If an alias is used across multiple dictionaries, the last
 				dictionary to define that alias will be used.
+			- parents=[] (list<str>): A history of aliases whose evaluation
+				depends on the given value being evaluated
 
 		Return:
 			- (str): The value string with aliases replaced
@@ -154,6 +156,8 @@ class ValAlias(object):
 		'''
 		# Need to make this list so we can traverse it backwards
 		alias_iterations = []
+		if parents is None:
+			parents = []
 
 		# Get each alias option and iterate though
 		alias_pattern = re.compile(r"(?<!\\)\{([^:]+)(:([^\{\}]+))?(?<!\\)\}", re.MULTILINE)
@@ -162,6 +166,12 @@ class ValAlias(object):
 			# Get the name / options from the match
 			alias_name = value[alias_m.start(1):alias_m.end(1)]
 			alias_options = value[alias_m.start(3):alias_m.end(3)]
+
+			# Check for circular dependency
+			if alias_name in parents:
+				raise ValueError('A circular dependency exists while evaluating alias "{0:s}"'.format(alias_name))
+			new_parents = parents
+			new_parents.append(alias_name)
 
 			# Find the matching alias
 			alias = None
@@ -174,7 +184,7 @@ class ValAlias(object):
 				raise ValueError('Could not find alias named "{0:s}" in provided alias dictionaries'.format(alias_name))
 
 			# Otherwise evaluate the alias
-			converted_value = alias.evaluate(alias_options, aliases)
+			converted_value = alias.evaluate(alias_options, aliases, new_parents)
 
 			# Add it to the list
 			alias_iterations.append((converted_value, alias_m))
@@ -231,7 +241,7 @@ class ValAlias(object):
 				# Copy over remaining parameters
 				self.parameters[parameter] = pvalue
 
-	def evaluate(self, options, other_aliases):
+	def evaluate(self, options, other_aliases, parents):
 		'''Extract the string value an alias evaluates to
 
 		TODO: Check to make sure that infinite alias recursion is not possible.
@@ -241,6 +251,8 @@ class ValAlias(object):
 			- other_aliases (list<dict<str,ValAlias>>): The other aliases
 				available for use when defining values. This is useful for
 				recursive aliases.
+			- parents (list<str>): A history of aliases whose evaluation depends
+				on the given value being evaluated
 
 		Return:
 			- str: The value the alias evaluates to
@@ -251,6 +263,7 @@ class ValAlias(object):
 				- The alias's options are not in the correct format for the
 					alias
 				- An issue occurred evaluating the alias
+				- A circular dependency exists in this evaluation
 			- NotImplementedError: this type of alias cannot be evaluated
 		'''
 		raise NotImplementedError('Cannot evaluate alias of base value alias class')
@@ -297,7 +310,7 @@ class StringAlias(ValAlias):
 		# Set the value
 		self.value = self.parameters['value']
 
-	def evaluate(self, options, other_aliases):
+	def evaluate(self, options, other_aliases, parents):
 		'''Extract the string value an alias evaluates to
 
 		TODO: Check to make sure that infinite alias recursion is not possible.
@@ -307,6 +320,8 @@ class StringAlias(ValAlias):
 			- other_aliases (list<dict<str,ValAlias>>): The other aliases
 				available for use when defining values. This is useful for
 				recursive aliases.
+			- parents (list<str>): A history of aliases whose evaluation depends
+				on the given value being evaluated
 
 		Return:
 			- str: The value the alias evaluates to
@@ -317,9 +332,10 @@ class StringAlias(ValAlias):
 				- The alias's options are not in the correct format for the
 					alias
 				- An issue occurred evaluating the alias
+				- A circular dependency exists in this evaluation
 			- NotImplementedError: this type of alias cannot be evaluated
 		'''
-		return ValAlias.evaluateAliases(self.value, other_aliases)
+		return ValAlias.evaluateAliases(self.value, other_aliases, parents)
 
 addAliasClass(StringAlias)
 
@@ -376,7 +392,7 @@ class PathAlias(ValAlias):
 			if not self.path.is_absolute():
 				self.path = self.file.parent.joinpath(self.path)
 
-	def evaluate(self, options, other_aliases):
+	def evaluate(self, options, other_aliases, parents):
 		'''Extract the string value an alias evaluates to
 
 		TODO: Check to make sure that infinite alias recursion is not possible.
@@ -386,6 +402,8 @@ class PathAlias(ValAlias):
 			- other_aliases (list<dict<str,ValAlias>>): The other aliases
 				available for use when defining values. This is useful for
 				recursive aliases.
+			- parents (list<str>): A history of aliases whose evaluation depends
+				on the given value being evaluated
 
 		Return:
 			- str: The value the alias evaluates to
@@ -396,10 +414,11 @@ class PathAlias(ValAlias):
 				- The alias's options are not in the correct format for the
 					alias
 				- An issue occurred evaluating the alias
+				- A circular dependency exists in this evaluation
 			- NotImplementedError: this type of alias cannot be evaluated
 		'''
 		# Get the output string
-		output = ValAlias.evaluateAliases(str(self.path), other_aliases)
+		output = ValAlias.evaluateAliases(str(self.path), other_aliases, parents)
 
 		# Add slash for directories if a slash is not already there
 		if 'dir' in self.subtypes:
