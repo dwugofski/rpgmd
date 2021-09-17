@@ -1,6 +1,13 @@
-[[title|Framing Mulac|4]]
 
-[[import|mihil|./mihil]]
+[[css|web|{cssdir}colors.css]]
+[[css|web|{cssdir}fonts.css]]
+[[css|web|{cssdir}main.css]]
+[[css|web|{cssdir}npc.css]]
+[[css|web|{cssdir}toc_index.css]]
+
+[[navbar|Frame Mulac|./index.md]]
+
+[[namespace|mihil|./mihil.md]]
 
 [[l|Pela|Pela|mihil]] believes the next step in the plan is to eliminate [[l|Kobil Hau|Kobil|mihil]]'s support for [[l|Mulac|Mulac|mihil]]. Her plan is to blow up the Domestic Magisterium building with Kobil inside, using a remote-detonation bomb. At the scene of the crime will be placed Mulac's favorite magic brooch, which he always carries with him to bring him luck. As well, dust and debris from the Domestic Magisterium's cellar will be placed on Mulac's boots as further evidence, and forged documents will be left which incriminate Mulac as having falsified quota records for personal gain and a suggestion that Kobil is close to catching onto the ruse.
 
@@ -407,12 +414,12 @@ If the party killed all of the ghosts, Kimgrathl will be extremely angry with th
 
 [[a|The Platform]]: The platform is an elevator to the Domestic Magisterium undercroft.
 
-[[stats|Kimgrathl Hall Creatures|
+[stats|Kimgrathl Hall Creatures|
 creature:mihil:corrupted_advisor,
 creature:mihil:corrupted_smith,
 creature:mihil:corrupted_guard_captain,
 creature:mihil:corrupted_son,
-creature:mihil:kimgrathl]]
+creature:mihil:kimgrathl]
 
 # Finishing the Mission
 
@@ -457,5 +464,3 @@ Pela, like many in the higher ranks of the Jaguar Slayers, knows that the upper 
 The modern Phantagorical Cognitum temple, which spans both the Upper- and Undercity, used to be a temple to Nibarell. In the Undercity, a secluded corner of the temple was constructed for rituals to the Japethan Forge. A ritual chamber stood before a long tunnel to the forge, and it was the main tunnel used by the priests. 
 
 When Mihil was conquered, Atzivec collapsed all tunnels to the forge, including the one in the temple, and the ritual chamber was converted into a barely-used storage house for the Phantagorical Cognitum. However, well before the party came to Mihil, Pela worked to dig the tunnel entrance out again, on orders from Exanell. She knows it leads to the Japethan Forge.
-
-[[index]]

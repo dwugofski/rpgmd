@@ -1,4 +1,11 @@
-[[title|Enchanting|0]]
+
+[[css|web|{cssdir}colors.css]]
+[[css|web|{cssdir}fonts.css]]
+[[css|web|{cssdir}main.css]]
+[[css|web|{cssdir}npc.css]]
+[[css|web|{cssdir}toc_index.css]]
+
+[[navbar|Test File|./index.md]]
 
 Enchanting is, formally, the process of manipulating and/or combining an existing class-2 axial construct with one or more class-2 and/or class-1 constructs in order to create a new class-2 axial construct with the ability to manipulate the flow of raw axiopsychogenic matter for some designed end. Informally, it is the process of bestowing magical properties onto an object.
 
@@ -91,5 +98,3 @@ These stones are not associated with any particular CABE, but still have special
 
 * [[a|Diamond]] mimics the ethereophysical binding which keeps souls and bodies together. They are instrumental in resurrection magic, which attempts to re-stitch the binding of soul and body. Please not that, diamond, while composed of [[l|carbon|Carbon]] like graphite, cannot be restructured in the same way.
 * [[a|Seraphinite]] maintains a connection with the Axis. Despite being more common than a lot of gems, seraphinite is the most precious and expensive gemstone, as it is used in almost every enchanting work. The connection to the axis allows the work to pull axiospychogenic matter from the Axis and recharge itself without requiring a person to push matter into it. The rate at which an item accumulates axiopsychogenic matter is proportional to the amount of seraphinite contained within. Fortunately, very little seraphinite goes a long way when enchanting, and most simple magic items only require a pinch of seraphinite dust to recharge in a day, but even a pinch of dust is a huge portion of a crafting items' expense.
-
-[[index|4]]

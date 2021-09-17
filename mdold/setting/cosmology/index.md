@@ -1,6 +1,14 @@
-[[title|Cosmology, Philosophy, Science, and Magic|0]]
 
-[[import|primordials|./primordials]]
+[[css|web|{cssdir}colors.css]]
+[[css|web|{cssdir}fonts.css]]
+[[css|web|{cssdir}main.css]]
+[[css|web|{cssdir}npc.css]]
+[[css|web|{cssdir}toc_index.css]]
+
+[[index|Cosmology of Makafell|
+./cabes/index.md,
+./magic/index.md
+|../index.md]]
 
 While there are many different faiths, religions, and philosophical perspectives within Makafell, there are some generally-accepted truths of how the cosmos is structured and organized. This section presents the dominant theories, models, and understandings of Makafellan cosmology. Not all of these truths are widely-known, and some of them are secrets known only to few, while some others have been lost to time. 
 
@@ -61,5 +69,3 @@ Axiopsychogenic matter, sometimes colloquially referred to as **soul matter**, f
 Without axiopsychogenic matter, the ethereophysical shell would break down due to the pressure exerted from outside constructs. However, without an ethereophysical shell, the axiopsychogenic matter would have no net effect on outside constructs, rendering it essentially useless.
 
 The process of pushing axiopsychogenic matter into or through an ethereophysical shell is **pumping**.
-
-[[index|4]]

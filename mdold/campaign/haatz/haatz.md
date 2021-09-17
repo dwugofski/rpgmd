@@ -1,6 +1,11 @@
-[[title|The City of Haatz|0]]
 
-[[index|4]]
+[[css|web|{cssdir}colors.css]]
+[[css|web|{cssdir}fonts.css]]
+[[css|web|{cssdir}main.css]]
+[[css|web|{cssdir}npc.css]]
+[[css|web|{cssdir}toc_index.css]]
+
+[[navbar|The City of Haatz|./index.md]]
 
 # Overview
 
@@ -60,12 +65,12 @@ Behind the scenes, Hechechi takes great pains to maintain order and stability be
 
 Roll 1d4 on this table to determine the fad. The fad will last 1d10 days, then another fad should be rolled.
 
-[[table|5|2|both|
-Dice Roll | Fad |
-1         | Color. 1d8 for 1: red, 2: green, 3: blue, 4: yellow, 5: purple, 6: orange, 7: black, 8: white |
-2         | Metal. 1d6 for 1-2: gold, 3-4: silver, 5-6: copper |
-3         | Fur. 1d6 for 1: cattle, 2: sheep, 3: alpaca, 4: boar, 5: jaguar, 6: wolf |
-4         | Style. 1d6 for 1: many-layered, 2: formal, 3: plain, 4: athletic, 5: promiscuous, 6: costume
+[[table||0,*;*,0|
+Dice Roll ,, Fad ;;
+1         ,, Color. 1d8 for 1: red, 2: green, 3: blue, 4: yellow, 5: purple, 6: orange, 7: black, 8: white ;;
+2         ,, Metal. 1d6 for 1-2: gold, 3-4: silver, 5-6: copper ;;
+3         ,, Fur. 1d6 for 1: cattle, 2: sheep, 3: alpaca, 4: boar, 5: jaguar, 6: wolf ;;
+4         ,, Style. 1d6 for 1: many-layered, 2: formal, 3: plain, 4: athletic, 5: promiscuous, 6: costume
 ]]
 
 # People

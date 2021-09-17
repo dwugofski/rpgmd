@@ -150,7 +150,7 @@ class IndexMacro(FileMacro):
 					# Add in the title
 					output += '<a href="{0:s}">{1:s}</a>'.format(str(path_prefix.joinpath(link_path)), finfo.title)
 					if isinstance(finfo, IndexMacro) and depth < 4:
-						output += finfo.compile(profile='web', depth=depth+1, path_prefix=Path(link_path).parent)
+						output += finfo.compile(profile='web', depth=depth+1, path_prefix=path_prefix.joinpath(link_path).parent)
 				except Exception as e:
 					# Rethrow (Document-based) exceptions with the information for this macro
 					raise MacroError(type(e), str(e))
@@ -272,7 +272,23 @@ class NavBarMacro(FileMacro):
 		# Ensure the index file exists
 		if not index_path.exists():
 			raise MacroError(FileNotFoundError, 'Could not find the index "{0:s}" linked to by the navbar file macro'.format(str(index_path)))
+		self.index_path = index_path
 
+	def compile(self, profile='web'):
+		'''Prototype method for compiling a macro into markdown / HTML
+
+		Args:
+			- profile='web' (str): The compiling profile for the macro. Options
+				are listed in the Document.compile documentation
+
+		Raise:
+			- NotImplementedError:
+				- The compiling profile is not supported
+				- The indicated index is not an index macro
+			- FileNotFoundError:
+				- The provided index cannot be found
+				- An file in the provided index cannot be found
+		'''
 		# Extract the previous, next, and self links
 		nextf = None # Relative path to the next file
 		prevf = None # Relative path to the previous file
@@ -281,25 +297,25 @@ class NavBarMacro(FileMacro):
 
 		# Get the index's title, NSM, and 
 		try:
-			doc = Document(index_path, self._doc.aliases)
+			doc = Document(self.index_path, self._doc.aliases)
 			doc.parse()
 			index = doc.file_macro
 
 			# Make the namespace macro to reference the document and return the title, NSM pair
 			self.index = (index.title, NamespaceMacro.makeMacro(
-				'_index', index_path, self._line, self._column, self._endline, self._endcolumn, self._doc, compiled=True))
+				'_index', self.index_path, self._line, self._column, self._endline, self._endcolumn, self._doc, compiled=True))
 		except Exception as e:
 			# Rethrow (Document-based) exceptions with the information for this macro
 			raise MacroError(type(e), 'Problem parsing index document:\n' + str(e))
 
 		# Ensure we have an index macro from the index file
 		if not isinstance(index, IndexMacro):
-			raise MacroError(ValueError, 'Index file "{0:s}" does not have an index macro'.format(str(index_path)))
+			raise MacroError(ValueError, 'Index file "{0:s}" does not have an index macro'.format(str(self.index_path)))
 
 		# Iterate through the items in the index macro and determine the previous / self / next items
 		for item in index.items:
 			# Get the absolute path to the indicated file
-			abspath = index_path.parent.joinpath(item.relpath).resolve()
+			abspath = self.index_path.parent.joinpath(item.relpath).resolve()
 			if abspath == Path(self._doc.filepath).resolve():
 				selff = abspath
 				continue
@@ -310,7 +326,7 @@ class NavBarMacro(FileMacro):
 				break
 		# Ensure we found ourselves in the list
 		if selff is None:
-			raise MacroError(ValueError, 'Navbar could not find self in index "{0:s}"'.format(str(index_path)))
+			raise MacroError(ValueError, 'Navbar could not find self in index "{0:s}"'.format(str(self.index_path)))
 
 		# Get the prevf's title
 		self.prevf = None
@@ -329,23 +345,6 @@ class NavBarMacro(FileMacro):
 			except Exception as e:
 				# Rethrow (Document-based) exceptions with the information for this macro
 				raise MacroError(type(e), 'Problem parsing previous file document:\n' + str(e))
-
-
-	def compile(self, profile='web'):
-		'''Prototype method for compiling a macro into markdown / HTML
-
-		Args:
-			- profile='web' (str): The compiling profile for the macro. Options
-				are listed in the Document.compile documentation
-
-		Raise:
-			- NotImplementedError:
-				- The compiling profile is not supported
-				- The indicated index is not an index macro
-			- FileNotFoundError:
-				- The provided index cannot be found
-				- An file in the provided index cannot be found
-		'''
 
 
 		if profile == 'web':

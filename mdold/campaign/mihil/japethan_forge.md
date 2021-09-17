@@ -1,7 +1,14 @@
-[[title|Japethan Forge|4]]
 
-[[import|mihil|./mihil]]
-[[import|mulac|./frame_mulac]]
+[[css|web|{cssdir}colors.css]]
+[[css|web|{cssdir}fonts.css]]
+[[css|web|{cssdir}main.css]]
+[[css|web|{cssdir}npc.css]]
+[[css|web|{cssdir}toc_index.css]]
+
+[[navbar|Japethan Forge|./index.md]]
+
+[[namespace|mihil|./mihil.md]]
+[[namespace|mulac|./frame_mulac.md]]
 
 With the location of the Japethan Forge revealed, the party makes their way to the totem of Nibarell. Here, they discover the forge has been overrun by Nyogtha. The abyssal darkness has been contained by two worshippers of Nibarell for decades, but Hrogthl recently killed one in order to let Nyogtha reach out through the Tong's Blood crystals and project its influence.
 
@@ -129,9 +136,7 @@ For restoring the totem, the party gains <span class="reward">140 XP</span>.
 
 The reliquary contains the <span class="reward">[[l|Japethan Hammer|japethan_hammer]]</span>.
 
-[[stats|Japethan Forge Creatures|
+[stats|Japethan Forge Creatures|
 creature:core:shadow,
 creature:mihil:nyogtha,
-item:mihil:japethan_hammer]]
-
-[[index]]
+item:mihil:japethan_hammer]

@@ -1,6 +1,14 @@
-[[title|The City of Mihil|0]]
-[[import|nibarell|../../setting/cosmology/cabes/sublimes/nibarell]]
-[[import|exanell|../../setting/cosmology/cabes/sublimes/exanell]]
+
+[[css|web|{cssdir}colors.css]]
+[[css|web|{cssdir}fonts.css]]
+[[css|web|{cssdir}main.css]]
+[[css|web|{cssdir}npc.css]]
+[[css|web|{cssdir}toc_index.css]]
+
+[[navbar|Mihil|./index.md]]
+
+[[namespace|nibarell|../../setting/cosmology/cabes/sublimes/nibarell.md]]
+[[namespace|exanell|../../setting/cosmology/cabes/sublimes/exanell.md]]
 
 # Overview
 
@@ -357,5 +365,3 @@ On the western shore of the river, dense docks with shanty buildings and large w
 		* Up to uncommon (illegal) bombs or poisons up to level 5:
 			* None in stock
 			* +20% markup in addition to rush order markup (max +50%)
-
-[[index|1]]

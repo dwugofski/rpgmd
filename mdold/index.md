@@ -1,3 +1,8 @@
-[[title|The World of Makafell|0]]
 
-[[index|4]]
+[[css|web|{cssdir}colors.css]]
+[[css|web|{cssdir}fonts.css]]
+[[css|web|{cssdir}main.css]]
+[[css|web|{cssdir}npc.css]]
+[[css|web|{cssdir}toc_index.css]]
+
+[[index|Makafellan Campaign|./setting/index.md,./campaign/index.md]]

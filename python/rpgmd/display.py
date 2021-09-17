@@ -717,3 +717,74 @@ class StatblockListMacro(Macro):
 # Add the table macro class to the list
 addMacroClass(StatblockListMacro)
 
+class EncounterMacro(Macro):
+	'''Class for a macro to display a list of statblocks
+
+	Attributes:
+	'''
+
+	TAG = 'enc'
+
+	@staticmethod
+	def makeMacro(*init_args, **init_kwargs):
+		'''Make an import macro from the provided details
+
+		Args:
+			- title (str): The title text to display for this macro
+			- classes (list<str>): The classes to apply to the output html of
+				this macro
+			- blocks (list<StatblockMacro>): The statblocks to show for this
+				macro
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		# Make the macro
+		attrs = []
+		macro_text = Macro.makeMacroText(EncounterMacro.TAG, attrs)
+		return EncounterMacro(macro_text, *init_args, **init_kwargs)
+
+	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
+		'''Constructor for StatblockMacro
+
+		Format:
+		Where
+
+		Args:
+			- text (str): The text (including the containing characters) for the
+				macro
+			- startline (int): The line the macro starts on
+			- startcolumn (int): The character index the macro starts on
+			- endline (int): The line the macro ends on
+			- endcolumn (int): The character index the macro ends on
+			- doc (Document): The document object defining the macro
+			- [compiled=False (bool)]: Whether this containing document needs to
+				be recompiled if the imported file is changed
+		'''
+		super(EncounterMacro, self).__init__(text, startline, startcolumn, endline, endcolumn, doc)
+
+	def compile(self, profile='web'):
+		'''Method for compiling a macro into markdown / HTML
+
+		Args:
+			- profile='web' (str): The compiling profile for the macro. Options
+				are listed in the Document.compile documentation
+
+		Raise:
+			- NotImplementedError:
+				- The compiling profile is not supported
+		'''
+		return '<span>Closed for maintenance</span>'
+
+	def iscompileable(self):
+		'''Protoype method for compiling a macro into markdown / HTML
+
+		Return:
+			'True' if the macro can be compiled, otherwise 'False'. For this
+			class, always return 'True'
+		'''
+		return True
+
+# Add the table macro class to the list
+addMacroClass(EncounterMacro)

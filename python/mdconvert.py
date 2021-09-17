@@ -22,7 +22,7 @@ HTML_SUFFIX = '.html'
 alias_dicts = [ValAlias.makeAliasDictionary(Path(__file__).resolve().parent.joinpath('aliases.json'))]
 
 # Get the md, tmp, and html directories
-md_dir = Path(__file__).resolve().parent.joinpath('../md')
+md_dir = Path(__file__).resolve().parent.joinpath('../mdold')
 tmp_dir = Path(__file__).resolve().parent.joinpath('../tmp')
 html_dir = Path(__file__).resolve().parent.joinpath('../html')
 
