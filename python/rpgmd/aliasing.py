@@ -159,8 +159,15 @@ class ValAlias(object):
 		if parents is None:
 			parents = []
 
+		# Debug log
+		parentstr = ''
+		for parent in parents:
+			parentstr += parent + ' '
+		parentstr = parentstr[:-1]
+		logging.debug('Evaluating aliase "{0:s}" [{1:s}]'.format(value, parentstr))
+
 		# Get each alias option and iterate though
-		alias_pattern = re.compile(r"(?<!\\)\{([^:]+)(:([^\{\}]+))?(?<!\\)\}", re.MULTILINE)
+		alias_pattern = re.compile(r"(?<!\\)\{([^:\}]+)(:([^\{\}]+))?(?<!\\)\}", re.MULTILINE)
 		alias_strings = alias_pattern.finditer(value)
 		for alias_m in alias_strings:
 			# Get the name / options from the match
@@ -170,7 +177,7 @@ class ValAlias(object):
 			# Check for circular dependency
 			if alias_name in parents:
 				raise ValueError('A circular dependency exists while evaluating alias "{0:s}"'.format(alias_name))
-			new_parents = parents
+			new_parents = parents.copy()
 			new_parents.append(alias_name)
 
 			# Find the matching alias

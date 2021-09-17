@@ -23,8 +23,6 @@ body #main .statblock_holder.notitle {
 }
 
 body #main .statblock {
-	margin-bottom: 1em;
-	width: calc(50% - 2em);
 }
 
 body #main .statblock .statblock_header {

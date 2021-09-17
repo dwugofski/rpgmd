@@ -421,6 +421,14 @@ creature:mihil:corrupted_guard_captain,
 creature:mihil:corrupted_son,
 creature:mihil:kimgrathl]
 
+[[statblocks|Kimgrathl Hall Creatures||
+corrupted_advisor,,{npc_lib_mihil}corrupted_advisor.xml,,web::{npc_xslt_web},,{npc_xsd};;
+corrupted_smith,,{npc_lib_mihil}corrupted_smith.xml,,web::{npc_xslt_web},,{npc_xsd};;
+corrupted_guard_captain,,{npc_lib_mihil}corrupted_guard_captain.xml,,web::{npc_xslt_web},,{npc_xsd};;
+corrupted_son,,{npc_lib_mihil}corrupted_son.xml,,web::{npc_xslt_web},,{npc_xsd};;
+kimgrathl,,{npc_lib_mihil}kimgrathl.xml,,web::{npc_xslt_web},,{npc_xsd}
+]]
+
 # Finishing the Mission
 
 ## Planting the Bomb

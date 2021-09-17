@@ -501,7 +501,7 @@ class StatblockMacro(Macro):
 			self.xsd = Path(self.attrs[3])
 			if not self.xsd.is_absolute():
 				self.xsd = Path(self._doc.filepath).parent.joinpath(self.xsd)
-			self.imports.append(ImportMacro.makeMacro('_sb_{0:s}_xsd'.format(self.title), xsd,
+			self.imports.append(ImportMacro.makeMacro('_sb_{0:s}_xsd'.format(self.title), self.xsd,
 				self._line, self._column, self._endline, self._endcolumn, self._doc, True))
 
 		# For each import macro, add it to the defining document
@@ -527,15 +527,12 @@ class StatblockMacro(Macro):
 			# Catch and rethrow (e.g. XML) errors
 
 			# Get the input document
-			source = None
+			source = etree.parse(str(self.source))
 			if not self.xsd is None:
 				# Use validator with parser if we have an XSD file
 				xsd_doc = etree.parse(str(self.xsd))
 				xsd_schema = etree.XMLSchema(xsd_doc)
-				source = etree.parse(str(self.source), etree.XMLParser(xsd_schema)) # Will throw syntax error if invalid
-			else:
-				# Otherwise just read file as-is
-				source = etree.parse(str(self.source))
+				xsd_schema.validate(source) # Will throw syntax error if invalid
 
 			# Get the transform
 			xslt_doc = etree.parse(str(self.xslts[profile]))
@@ -543,7 +540,7 @@ class StatblockMacro(Macro):
 			output_doc = xslt_transform(source)
 
 			# And get the output as string
-			return etree.tostring(output_doc, encoding='unicode')
+			return etree.tostring(output_doc, encoding='unicode', pretty_print=True)
 
 		except Exception as e:
 			# Rethrow (e.g. XML-based) exceptions with the information for this macro
@@ -689,15 +686,15 @@ class StatblockListMacro(Macro):
 
 			# Add the statblocks
 			# Break up into left/right columns
-			left_column = '<div class="2column fl">'
-			right_column = '<div class="2column fr">'
+			left_column = '<div class="column2 fl">'
+			right_column = '<div class="column2 fr">'
 			for i,block in enumerate(self.blocks):
 				if i % 2 == 0:
 					left_column += block.compile(profile)
 				else:
 					right_column += block.compile(profile)
-			output += left_column + '</div>'
-			output += right_column + '</div>'
+			output += left_column + '</div></div>'
+			output += right_column + '</div></div>'
 
 			# Add the clearer, close the container, and finish
 			output += '<div class="clearer"></div></div>'

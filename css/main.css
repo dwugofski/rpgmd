@@ -384,3 +384,14 @@ body #main .navbar .fr.link {
 	width: 25%;
 	text-align: right;
 }
+
+body #main .column2 {
+	width: calc(50% - 1em);
+	margin: 0;
+}
+body #main .column2.fl {
+	margin-right: 0.5em;
+}
+body #main .column2.fr {
+	margin-left: 0.5em;
+}

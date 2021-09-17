@@ -139,4 +139,10 @@ The reliquary contains the <span class="reward">[[l|Japethan Hammer|japethan_ham
 [stats|Japethan Forge Creatures|
 creature:core:shadow,
 creature:mihil:nyogtha,
-item:mihil:japethan_hammer]
+item:mihil:japethan_hammer,
+]
+
+[[statblocks|Japethan Forge Creatures||
+shadow,,{npc_lib_core}shadow.xml,,web::{npc_xslt_web},,{npc_xsd};;
+shadow,,{npc_lib_mihil}nyogtha.xml,,web::{npc_xslt_web},,{npc_xsd}
+]]

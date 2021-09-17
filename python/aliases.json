@@ -12,7 +12,7 @@
 	"npc_xsd": {
 		"type": "path",
 		"subtypes": ["file", "abs"],
-		"value": "../res/xml/templates/creature.xsd"
+		"value": "../res/xml/templates/creatures/creature.xsd"
 	},
 	"npc_xslt_web": {
 		"type": "path",
@@ -23,6 +23,11 @@
 		"type": "path",
 		"subtypes": ["dir", "abs"],
 		"value": "../res/xml/libs/core/creatures/"
+	},
+	"npc_lib_mihil": {
+		"type": "path",
+		"subtypes": ["dir", "abs"],
+		"value": "../res/xml/libs/mihil/creatures/"
 	},
 	"footext": {
 		"type": "string",

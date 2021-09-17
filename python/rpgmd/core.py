@@ -546,6 +546,7 @@ class Document(object):
 				html_title = '<div id="title">{0:s}</div>'.format(self.file_macro.title)
 
 			# Get the body
+			logging.debug('Converting temp file {0:s}'.format(str(tmpfile)))
 			html_body = mdconvert(str(tmpfile))
 
 			# Write out the code
