@@ -1,0 +1,26 @@
+{
+	"xmls": {
+		"type": "path",
+		"subtypes": ["dir", "abs"],
+		"value": "../res/xml/"
+	},
+	"npc_xsd": {
+		"type": "path",
+		"subtypes": ["file", "abs"],
+		"value": "../res/xml/templates/creature.xsd"
+	},
+	"npc_xslt_web": {
+		"type": "path",
+		"subtypes": ["file", "abs"],
+		"value": "../res/xml/templates/creatures/creature.smallblock.xslt"
+	},
+	"npc_lib_core": {
+		"type": "path",
+		"subtypes": ["dir", "abs"],
+		"value": "../res/xml/libs/core/creatures/"
+	},
+	"footext": {
+		"type": "string",
+		"value": "FOOBAR"
+	}
+}

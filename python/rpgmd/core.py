@@ -7,6 +7,8 @@ from pathlib import Path
 from contextlib import contextmanager
 from markdown2 import markdown_path as mdconvert
 
+from .aliasing import ValAlias
+
 _MacroClasses = {} # Keeps track of classes which have been registered
 
 def addMacroClass(macroClass, tag=None):
@@ -117,11 +119,11 @@ class Macro(object):
 			return teststr
 
 	@staticmethod
-	def extractListString(csv_str, trim=True, drop_empty=True, delimiter=','):
+	def extractListString(list_str, trim=True, drop_empty=True, delimiter=','):
 		'''Extract a list from a list string (e.g. a comma-separated-value list)
 
 		Args:
-			- csv_str (str): The list string to use
+			- list_str (str): The list string to use
 			- trim=True (bool): Whether to trim whitespace from the start/end of
 				each item in the list string
 			- drop_empty=True (bool): Whether to drop empty strings from the
@@ -133,7 +135,7 @@ class Macro(object):
 		'''
 		ret = []
 		item_p = re.compile(r"[\s]*(.*[^\s])[\s]*", re.DOTALL | re.MULTILINE) # Regex to extract the non-whitespace part of the item
-		for item in csv_str.split(delimiter):
+		for item in list_str.split(delimiter):
 			# Trim the whitespace from beginning / end
 			if trim:
 				item_m = item_p.match(item)
@@ -202,6 +204,7 @@ class Macro(object):
 
 		# Extract just the macro spec string
 		text = text[len(Macro.OPENING_SEQUENCE):-len(Macro.CLOSING_SEQUENCE)]
+		logging.debug(text)
 
 		# Split the macro spec string and record the spec elements
 		self.attrs = []
@@ -214,7 +217,9 @@ class Macro(object):
 				if self.tag is None:
 					self.tag = attr_match.group(1)
 				else:
-					self.attrs.append(attr_match.group(1))
+					logging.debug(attr_match.group(1))
+					new_attr = ValAlias.evaluateAliases(attr_match.group(1), self._doc.aliases)
+					self.attrs.append(new_attr)
 			else:
 				# If not, we should just add an empty string (as that meant the item was just white space)
 				logging.info('Empty macro attribute string "{0:s}" found in "{1:s}"'.format(attr, self.locStr()))
@@ -245,6 +250,15 @@ class Macro(object):
 		'''
 		return False
 
+	def tostring(self):
+		'''Method to convert a macro to its text representation in the source
+		document.
+
+		Return:
+			- str: The text which would create this macro
+		'''
+		return Macro.makeMacroText(self.tag, self.attrs)
+
 class Document(object):
 	'''Class to wrap information and operations for a given macro-containing
 	text file.
@@ -255,15 +269,19 @@ class Document(object):
 		- imports (dict{str:ImportMacro}): Dictionary mapping import name to the
 			related import macro
 		- file_macro (FileMacro): The file description macro for the document
+		- aliases (list<dir<ValAlias>>): The aliases to use when evaluating
+			values for the document
 	'''
 
-	def __init__(self, filepath):
+	def __init__(self, filepath, aliases):
 		'''Create a document wrapper object
 
 		Arguments:
 			- filepath (str|Path): The path to the file for the document. A
 				relative path string will be evaluated relative to the current
 				working directory
+			- aliases (list<dict<ValAlias>>): The aliases to use when parsing
+				macros for this document
 
 		Raise:
 			- FileNotFoundError: No file exists at the path specified
@@ -275,6 +293,7 @@ class Document(object):
 		self.macros = []
 		self.imports = {}
 		self.file_macro = None
+		self.aliases = aliases
 
 	def addMacro(self, new_macro):
 		'''Add a macro to this document's macro lists
@@ -580,7 +599,7 @@ class ImportMacro(Macro):
 			- **init_kwargs (varargs): The keyword arguments for the macro
 				definition. See the __init__ function for more details
 		'''
-		attrs = [import_name, import_path]
+		attrs = [import_name, str(import_path)]
 		macro_text = Macro.makeMacroText(ImportMacro.TAG, attrs)
 		return ImportMacro(macro_text, *init_args, **init_kwargs)
 

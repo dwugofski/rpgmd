@@ -15,6 +15,7 @@ or when this is moved to a public forum:
 	the content itself is acceptable
 '''
 
+from .aliasing import *
 from .core import *
 from .linking import *
 from .indexing import *

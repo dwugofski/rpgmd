@@ -1,8 +1,10 @@
 # Macros to handle displaying special objects
 
 import re
+import lxml.etree as etree
 
 from pathlib import Path
+
 
 from .core import *
 
@@ -374,3 +376,344 @@ class TableMacro(Macro):
 
 # Add the table macro class to the list
 addMacroClass(TableMacro)
+
+class StatblockMacro(Macro):
+	'''Macro class to handle the display of a statblock
+
+	Attributes:
+		- title (str): The id of this generator
+		- source (Path): Absolute path to the source .xml file for the statblock
+		- xsd (Path|None): Absolute path to the xsd validator for the statblock,
+			or None if no validator should be used for the statblock
+		- xslts (dict<str,Path>): Dictionary of the different templates to use
+			for creating the output HTML for different profiles. Paths are
+			absolute
+		- imports (list<ImportMacro>): The import macros managed by this
+			Statblock for its imported files
+	'''
+
+	TAG = 'statblock'
+
+	@staticmethod
+	def makeMacro(title, source, xsd, xslts, *init_args, **init_kwargs):
+		'''Make an import macro from the provided details
+
+		Args:
+			- title (str): The id of this generator
+			- source (Path|str): Path to the source .xml file for the statblock
+			- xsd (Path|str|None): Path to the xsd validator for the statblock,
+				or None if no validator should be used for the statblock
+			- xslts (dict<str,Path|str>): Dictionary of the different templates
+				to use for creating the output HTML for different profiles.
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		# Make the source path string
+		source = str(source)
+
+		# Make the xsd path string
+		if not xsd is None:
+			xsd = str(xsd)
+
+		# Make the xslts string
+		xsltstr = ''
+		for profile in xslts:
+			xsltstr += '{0:s}::{1:s},'.format(profile, xslts[profile])
+		xsltstr = xsltstr[:-1]
+
+		# Make the macro
+		attrs = [title, source, xsltstr, xsd]
+		macro_text = Macro.makeMacroText(StatblockMacro.TAG, attrs)
+		return StatblockMacro(macro_text, *init_args, **init_kwargs)
+
+	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
+		'''Constructor for StatblockMacro
+
+		Format:
+			title | source | xslts [| xsd]
+		Where
+			- title (str): The id of this generator
+			- source (str): The path to the source file for the statblock
+			- xslts (str): List of different transformation templates for the
+				output of the statblock. The list contains comma-separated
+				entries where each entry is formatted as:
+					profile::path
+				where
+					- profile (str): The profile to use the template for
+					- path (str): The path to the template
+			- xsd (str): The path to the xsd validator file for the statblock.
+				If not provided, no validation will be performed
+
+		Args:
+			- text (str): The text (including the containing characters) for the
+				macro
+			- startline (int): The line the macro starts on
+			- startcolumn (int): The character index the macro starts on
+			- endline (int): The line the macro ends on
+			- endcolumn (int): The character index the macro ends on
+			- doc (Document): The document object defining the macro
+			- [compiled=False (bool)]: Whether this containing document needs to
+				be recompiled if the imported file is changed
+		'''
+		super(StatblockMacro, self).__init__(text, startline, startcolumn, endline, endcolumn, doc)
+
+		logging.debug(text)
+
+		# Check to make sure we have enough attributes
+		if len(self.attrs) < 3:
+			raise MacroError(ValueError, 'Statblock macro does not have enough attributes, only has {0:d} attributes'.format(
+				len(self.attrs)))
+
+		# Save the title
+		self.title = self.attrs[0]
+
+		# Save the source, make sure it's valid, and add it to our imports list
+		self.source = Path(self.attrs[1])
+		if not self.source.is_absolute():
+			self.source = Path(self._doc.filepath).parent.joinpath(self.source)
+		self.imports = [ImportMacro.makeMacro('_sb_{0:s}_src'.format(self.title), self.attrs[1],
+			self._line, self._column, self._endline, self._endcolumn, self._doc, True)]
+
+		# For each template, make an import macro for the template
+		self.xslts = {}
+		xslte_p = re.compile(r"^[^:]+::.+$", re.DOTALL | re.MULTILINE)
+		xslts = Macro.extractListString(self.attrs[2])
+		logging.debug(self.attrs[2])
+		for entry in xslts:
+			# Validate format
+			if not xslte_p.match(entry):
+				raise MacroError(ValueError, 'Statblock macro XSLT specification string "{0:s}" is not in a valid format'.format(entry))
+
+			# Get the profile and path, and make the import macro for the template
+			(profile, path) = entry.split('::')
+			self.xslts[profile] = Path(path)
+			if not self.xslts[profile].is_absolute():
+				self.xslts[profile] = Path(self._doc.filepath).parent.joinpath(self.xslts[profile])
+			self.imports.append(ImportMacro.makeMacro('_sb_{0:s}_xslt_{1:s}'.format(self.title, profile), path,
+				self._line, self._column, self._endline, self._endcolumn, self._doc, True))
+
+		# If we have a validator, save it, make sure it's valid, and add it to
+		# our imports list
+		self.xsd = None
+		if len(self.attrs) >= 4 and self.attrs[3]:
+			self.xsd = Path(self.attrs[3])
+			if not self.xsd.is_absolute():
+				self.xsd = Path(self._doc.filepath).parent.joinpath(self.xsd)
+			self.imports.append(ImportMacro.makeMacro('_sb_{0:s}_xsd'.format(self.title), xsd,
+				self._line, self._column, self._endline, self._endcolumn, self._doc, True))
+
+		# For each import macro, add it to the defining document
+		for importmacro in self.imports:
+			doc.addMacro(importmacro)
+
+	def compile(self, profile='web'):
+		'''Method for compiling a macro into markdown / HTML
+
+		Args:
+			- profile='web' (str): The compiling profile for the macro. Options
+				are listed in the Document.compile documentation
+
+		Raise:
+			- NotImplementedError:
+				- The compiling profile is not supported
+		'''
+		# Ensure we support the given profile
+		if not profile in self.xslts:
+			raise MacroError(NotImplementedError, 'Statblock macro does not support "{0:s}" profile'.format(profile))
+
+		try:
+			# Catch and rethrow (e.g. XML) errors
+
+			# Get the input document
+			source = None
+			if not self.xsd is None:
+				# Use validator with parser if we have an XSD file
+				xsd_doc = etree.parse(str(self.xsd))
+				xsd_schema = etree.XMLSchema(xsd_doc)
+				source = etree.parse(str(self.source), etree.XMLParser(xsd_schema)) # Will throw syntax error if invalid
+			else:
+				# Otherwise just read file as-is
+				source = etree.parse(str(self.source))
+
+			# Get the transform
+			xslt_doc = etree.parse(str(self.xslts[profile]))
+			xslt_transform = etree.XSLT(xslt_doc)
+			output_doc = xslt_transform(source)
+
+			# And get the output as string
+			return etree.tostring(output_doc, encoding='unicode')
+
+		except Exception as e:
+			# Rethrow (e.g. XML-based) exceptions with the information for this macro
+			raise MacroError(type(e), 'Problem compiling Statblock from XML:\n' + str(e))
+
+	def iscompileable(self):
+		'''Protoype method for compiling a macro into markdown / HTML
+
+		Return:
+			'True' if the macro can be compiled, otherwise 'False'. For this
+			class, always return 'True'
+		'''
+		return True
+
+# Add the table macro class to the list
+addMacroClass(StatblockMacro)
+
+class StatblockListMacro(Macro):
+	'''Class for a macro to display a list of statblocks
+
+	Attributes:
+		- title (str): The title text to display for this macro
+		- classes (list<str>): The classes to apply to the output html of this
+			macro
+		- blocks (list<StatblockMacro>): The statblocks to show for this macro
+	'''
+
+	TAG = 'statblocks'
+
+	@staticmethod
+	def makeMacro(title, classes, blocks, xslts, *init_args, **init_kwargs):
+		'''Make an import macro from the provided details
+
+		Args:
+			- title (str): The title text to display for this macro
+			- classes (list<str>): The classes to apply to the output html of
+				this macro
+			- blocks (list<StatblockMacro>): The statblocks to show for this
+				macro
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		# Make the classes string
+		classestr = ''
+		for classn in classes:
+			classestr += classn + ','
+		classestr = classestr[:-1]
+
+		# Make the blocks string
+		statblockstr = ''
+		for statblock in blocks:
+			statblockstr += statblock.tostring()[1:-1].replace('|', ',,') + ';;'
+		statblockstr = statblockstr[:-2]
+
+		# Make the macro
+		attrs = [title, classestr, statblockstr]
+		macro_text = Macro.makeMacroText(StatblockListMacro.TAG, attrs)
+		return StatblockListMacro(macro_text, *init_args, **init_kwargs)
+
+	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
+		'''Constructor for StatblockMacro
+
+		Format:
+			title | classes | statblocks
+		Where
+			- title (str): The title text to display for this macro
+			- classes (str): The classes to modify how this list is displayed,
+				provided as a comma-separated-value list
+			- statblocks (str): The statblocks to include in this list, provided
+				as a series of ';;'-separated values where each item is of the
+				following format:
+					source,,xslts[,,xsd]
+				where
+					- source (str): The path to the source XML file for the
+						statblock
+					- xslts (str): The list of tranformation templates to use
+						for the statblock. See the statblock macro __init__
+						method for more details.
+					- xsd (str): The path to the XSD validator file to use for
+						the statblock (leave empty to not use a validator
+
+		Args:
+			- text (str): The text (including the containing characters) for the
+				macro
+			- startline (int): The line the macro starts on
+			- startcolumn (int): The character index the macro starts on
+			- endline (int): The line the macro ends on
+			- endcolumn (int): The character index the macro ends on
+			- doc (Document): The document object defining the macro
+			- [compiled=False (bool)]: Whether this containing document needs to
+				be recompiled if the imported file is changed
+		'''
+		super(StatblockListMacro, self).__init__(text, startline, startcolumn, endline, endcolumn, doc)
+
+		# Check to make sure we have enough attributes
+		if len(self.attrs) < 3:
+			raise MacroError(ValueError, 'Statblock list macro does not have enough attributes, only has {0:d} attributes'.format(
+				len(self.attrs)))
+
+		# Get the title
+		self.title = self.attrs[0]
+
+		# Get the classes list
+		self.classes = Macro.extractListString(self.attrs[1])
+
+		# Get the statblocks
+		self.blocks = []
+		for statblockdef in self.attrs[2].split(';;'):
+			new_sbm_text = '[[{0:s}|{1:s}]]'.format(StatblockMacro.TAG, statblockdef.replace(',,', '|'))
+			new_sbm = StatblockMacro(new_sbm_text, startline, startcolumn, endline, endcolumn, doc)
+			# Do not add to doc; do not want it to compile on its own
+			self.blocks.append(new_sbm)
+
+	def compile(self, profile='web'):
+		'''Method for compiling a macro into markdown / HTML
+
+		Args:
+			- profile='web' (str): The compiling profile for the macro. Options
+				are listed in the Document.compile documentation
+
+		Raise:
+			- NotImplementedError:
+				- The compiling profile is not supported
+		'''
+		# Ensure we support the given profile
+		for block in self.blocks:
+			if not profile in block.xslts:
+				raise MacroError(NotImplementedError, ('Statblock list macro {1:s} does not support "{0:s}" profile,'+
+					'because statblock "{2:s}" does not support that profile').format(profile, self.title, block.title))
+
+		# Create the statblocks
+		if profile == 'web':
+			# Start the output and add the classes
+			output = '<div class="statblock_container '
+			for classt in self.classes:
+				output += classt + ' '
+			output = output[:-1] + '">'
+
+			# Add the title
+			output += '<h1>{0:s}</h1>'.format(self.title)
+
+			# Add the statblocks
+			# Break up into left/right columns
+			left_column = '<div class="2column fl">'
+			right_column = '<div class="2column fr">'
+			for i,block in enumerate(self.blocks):
+				if i % 2 == 0:
+					left_column += block.compile(profile)
+				else:
+					right_column += block.compile(profile)
+			output += left_column + '</div>'
+			output += right_column + '</div>'
+
+			# Add the clearer, close the container, and finish
+			output += '<div class="clearer"></div></div>'
+			return output
+		else:
+			raise MacroError(NotImplementedError, 'Statblock list macro {1:s} does not support "{0:s}" profile'.format(profile, self.title))
+
+	def iscompileable(self):
+		'''Protoype method for compiling a macro into markdown / HTML
+
+		Return:
+			'True' if the macro can be compiled, otherwise 'False'. For this
+			class, always return 'True'
+		'''
+		return True
+
+# Add the table macro class to the list
+addMacroClass(StatblockListMacro)
+

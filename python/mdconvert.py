@@ -4,15 +4,21 @@ import os, logging, sys
 from pathlib import Path
 
 # Start logging
-logging.basicConfig(level=logging.INFO, format='%(levelname)-8s %(asctime)s\n{{%(filename)s[%(lineno)d] %(funcName)s}}\n%(message)s')
+logging.basicConfig(
+	filename='mdconvert.log',
+	level=logging.DEBUG,
+	format='%(levelname)-8s %(asctime)s\n{{%(filename)s[%(lineno)d] %(funcName)s}}\n%(message)s')
 
 # Now import rpgmd (need to log details from it)
-from rpgmd import Document
+from rpgmd import Document, ValAlias
 
 # Suffixes
 MD_SUFFIX = '.md'
 TMP_SUFFIX = '.tmp.md'
 HTML_SUFFIX = '.html'
+
+# Get the base alias dictionary file
+alias_dicts = [ValAlias.makeAliasDictionary(Path(__file__).resolve().parent.joinpath('aliases.json'))]
 
 # Get the md, tmp, and html directories
 md_dir = Path(__file__).resolve().parent.joinpath('../md')
@@ -47,7 +53,7 @@ try:
 				continue
 
 			# Get and parse the document
-			doc = Document(srcpath)
+			doc = Document(srcpath, alias_dicts)
 			doc.parse()
 
 			# Now get the paths to the tmp and output files

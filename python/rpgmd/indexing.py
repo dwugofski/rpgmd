@@ -143,7 +143,7 @@ class IndexMacro(FileMacro):
 				output += '<li>'
 				try:
 					# Make and parse the document to get the file info for it
-					doc = Document(item.path)
+					doc = Document(item.path, self._doc.aliases)
 					doc.parse()
 					# Need to get the file info for the item
 					finfo = doc.file_macro
@@ -223,7 +223,7 @@ class NavBarMacro(FileMacro):
 				created NamespaceMacro
 		'''
 		# Get the document
-		doc = Document(lpath)
+		doc = Document(lpath, self._doc.aliases)
 		doc.parse()
 
 		# Make the namespace macro to reference the document and return the title, NSM pair
@@ -281,7 +281,7 @@ class NavBarMacro(FileMacro):
 
 		# Get the index's title, NSM, and 
 		try:
-			doc = Document(index_path)
+			doc = Document(index_path, self._doc.aliases)
 			doc.parse()
 			index = doc.file_macro
 
