@@ -540,7 +540,7 @@ class StatblockMacro(Macro):
 			output_doc = xslt_transform(source)
 
 			# And get the output as string
-			return etree.tostring(output_doc, encoding='unicode', pretty_print=True)
+			return etree.tostring(output_doc, method='html', encoding='unicode')
 
 		except Exception as e:
 			# Rethrow (e.g. XML-based) exceptions with the information for this macro
@@ -651,6 +651,8 @@ class StatblockListMacro(Macro):
 		# Get the statblocks
 		self.blocks = []
 		for statblockdef in self.attrs[2].split(';;'):
+			if len(statblockdef) == 0:
+				continue
 			new_sbm_text = '[[{0:s}|{1:s}]]'.format(StatblockMacro.TAG, statblockdef.replace(',,', '|'))
 			new_sbm = StatblockMacro(new_sbm_text, startline, startcolumn, endline, endcolumn, doc)
 			# Do not add to doc; do not want it to compile on its own
@@ -693,8 +695,8 @@ class StatblockListMacro(Macro):
 					left_column += block.compile(profile)
 				else:
 					right_column += block.compile(profile)
-			output += left_column + '</div></div>'
-			output += right_column + '</div></div>'
+			output += left_column + '</div>'
+			output += right_column + '</div>'
 
 			# Add the clearer, close the container, and finish
 			output += '<div class="clearer"></div></div>'

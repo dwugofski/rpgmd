@@ -230,6 +230,13 @@ class Macro(object):
 	def compile(self, profile='web'):
 		'''Prototype method for compiling a macro into markdown / HTML
 
+		Note: All HTML must be written on a single line for the markdown2
+		library to properly skip it. Otherwise the text before the HTML will be
+		messed up. Additionally, the code must be proper HTML code.
+
+		This means that the lxml.etree.tostring() method must be called with
+		method='html' and pretty_print=False.
+
 		Args:
 			- profile='web' (str): The compiling profile for the macro. Options
 				are listed in the Document.compile documentation

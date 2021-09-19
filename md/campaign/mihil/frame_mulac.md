@@ -9,7 +9,7 @@
 
 [[namespace|mihil|./mihil.md]]
 
-[[l|Pela|Pela|mihil]] believes the next step in the plan is to eliminate [[l|Kobil Hau|Kobil|mihil]]'s support for [[l|Mulac|Mulac|mihil]]. Her plan is to blow up the Domestic Magisterium building with Kobil inside, using a remote-detonation bomb. At the scene of the crime will be placed Mulac's favorite magic brooch, which he always carries with him to bring him luck. As well, dust and debris from the Domestic Magisterium's cellar will be placed on Mulac's boots as further evidence, and forged documents will be left which incriminate Mulac as having falsified quota records for personal gain and a suggestion that Kobil is close to catching onto the ruse.
+Mistress [[l|Pela|Pela|mihil]] believes the next step in the plan is to eliminate [[l|Kobil Hau|Kobil|mihil]]'s support for [[l|Mulac|Mulac|mihil]]. Her plan is to blow up the Domestic Magisterium building with Kobil inside, using a remote-detonation bomb. At the scene of the crime will be placed Mulac's favorite magic brooch, which he always carries with him to bring him luck. As well, dust and debris from the Domestic Magisterium's cellar will be placed on Mulac's boots as further evidence, and forged documents will be left which incriminate Mulac as having falsified quota records for personal gain and a suggestion that Kobil is close to catching onto the ruse.
 
 # Preparing for the Mission
 
@@ -408,25 +408,19 @@ If the party killed all of the ghosts, Kimgrathl will be extremely angry with th
 
 [[a|The Elevator|Elevator]]
 
-> A small, dusty chamber filled with crates, barrels, and other storage boxes. Unlike the furniture in the rest of the Hall, these boxes are fully intact and bear the emblem of the Domestic Magisterium. A small platform with gears and chains stands at the eastern end of the room, beside a large lever.
+A small, dusty chamber filled with crates, barrels, and other storage boxes. Unlike the furniture in the rest of the Hall, these boxes are fully intact and bear the emblem of the Domestic Magisterium. A small platform with gears and chains stands at the eastern end of the room, beside a large lever.
 
 [[a|The Boxes]]: The boxes are storage for the Domestic Magisterium, and they have been down here several years. Nothing of significant value lies within, only linens, building materials, writing supplies, and old records of quota checklists. Some of the barrels are also being used to ferment wine and beer.
 
 [[a|The Platform]]: The platform is an elevator to the Domestic Magisterium undercroft.
-
-[stats|Kimgrathl Hall Creatures|
-creature:mihil:corrupted_advisor,
-creature:mihil:corrupted_smith,
-creature:mihil:corrupted_guard_captain,
-creature:mihil:corrupted_son,
-creature:mihil:kimgrathl]
 
 [[statblocks|Kimgrathl Hall Creatures||
 corrupted_advisor,,{npc_lib_mihil}corrupted_advisor.xml,,web::{npc_xslt_web},,{npc_xsd};;
 corrupted_smith,,{npc_lib_mihil}corrupted_smith.xml,,web::{npc_xslt_web},,{npc_xsd};;
 corrupted_guard_captain,,{npc_lib_mihil}corrupted_guard_captain.xml,,web::{npc_xslt_web},,{npc_xsd};;
 corrupted_son,,{npc_lib_mihil}corrupted_son.xml,,web::{npc_xslt_web},,{npc_xsd};;
-kimgrathl,,{npc_lib_mihil}kimgrathl.xml,,web::{npc_xslt_web},,{npc_xsd}
+kimgrathl,,{npc_lib_mihil}kimgrathl.xml,,web::{npc_xslt_web},,{npc_xsd};;
+mountainheard_shield,,{item_lib_mihil}mountainheart_shield.xml,,web::{item_xslt_web},,{item_xsd}
 ]]
 
 # Finishing the Mission

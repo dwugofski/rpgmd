@@ -22,11 +22,16 @@ body #main .statblock_holder.notitle {
 	margin-bottom: 0;
 }
 
-body #main .statblock {
-}
-
 body #main .statblock .statblock_header {
 	border-bottom: 0.2em solid var(--accent);
+	border-top: 0.2em solid var(--accent);
+	margin-top: 1em;
+	padding-top: 0.1em;
+}
+body #main .statblock:first-child .statblock_header {
+	border-top: none;
+	margin-top: 0em;
+	padding-top: 0;
 }
 
 body #main .statblock .statblock_header h1 {
@@ -48,6 +53,12 @@ body #main .statblock .statblock_header h2 {
 body #main .statblock p {
 	font-size: 80%;
 	margin-bottom: 0.2em;
+	margin-left: 0.5em;
+	text-indent: -0.5em;
+}
+body #main .statblock p.plaintext {
+	margin-left: 0em;
+	text-indent: 0.5em;
 }
 
 body #main .statblock ul {

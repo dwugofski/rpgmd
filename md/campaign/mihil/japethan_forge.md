@@ -136,13 +136,8 @@ For restoring the totem, the party gains <span class="reward">140 XP</span>.
 
 The reliquary contains the <span class="reward">[[l|Japethan Hammer|japethan_hammer]]</span>.
 
-[stats|Japethan Forge Creatures|
-creature:core:shadow,
-creature:mihil:nyogtha,
-item:mihil:japethan_hammer,
-]
-
 [[statblocks|Japethan Forge Creatures||
 shadow,,{npc_lib_core}shadow.xml,,web::{npc_xslt_web},,{npc_xsd};;
-shadow,,{npc_lib_mihil}nyogtha.xml,,web::{npc_xslt_web},,{npc_xsd}
+nyogtha,,{npc_lib_mihil}nyogtha.xml,,web::{npc_xslt_web},,{npc_xsd};;
+japethan_hammer,,{item_lib_mihil}japethan_hammer.xml,,web::{item_xslt_web},,{item_xsd}
 ]]

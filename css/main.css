@@ -123,43 +123,43 @@ body #main h6 a {
 	text-decoration: inherit;
 }
 
-body #main a.anchor {
+body #main .anchor {
 	color: var(--accent);
 	font-style: normal;
 	font-weight: bold;
 	text-decoration: underline;
 }
-body #main h1 a.anchor {
+body #main h1 .anchor {
 	color: inherit;
 	font-style: inherit;
 	font-weight: inherit;
 	text-decoration: inherit;
 }
-body #main h2 a.anchor {
+body #main h2 .anchor {
 	color: inherit;
 	font-style: inherit;
 	font-weight: inherit;
 	text-decoration: inherit;
 }
-body #main h3 a.anchor {
+body #main h3 .anchor {
 	color: inherit;
 	font-style: inherit;
 	font-weight: inherit;
 	text-decoration: inherit;
 }
-body #main h4 a.anchor {
+body #main h4 .anchor {
 	color: inherit;
 	font-style: inherit;
 	font-weight: inherit;
 	text-decoration: inherit;
 }
-body #main h5 a.anchor {
+body #main h5 .anchor {
 	color: inherit;
 	font-style: inherit;
 	font-weight: inherit;
 	text-decoration: inherit;
 }
-body #main h6 a.anchor {
+body #main h6 .anchor {
 	color: inherit;
 	font-style: inherit;
 	font-weight: inherit;
@@ -386,7 +386,7 @@ body #main .navbar .fr.link {
 }
 
 body #main .column2 {
-	width: calc(50% - 1em);
+	width: calc(50% - 0.5em);
 	margin: 0;
 }
 body #main .column2.fl {

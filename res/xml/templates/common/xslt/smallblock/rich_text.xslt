@@ -88,7 +88,7 @@
 		Displays a paragraph of text
 	-->
 	<xsl:template match='src:p'>
-		<p>
+		<p class='plaintext'>
 			<xsl:apply-templates/>
 		</p>
 	</xsl:template>

@@ -5,7 +5,7 @@
 [[css|web|{cssdir}npc.css]]
 [[css|web|{cssdir}toc_index.css]]
 
-[[file|The City of Haatz]]
+[[navbar|The City of Haatz|./index.md]]
 
 # Overview
 
@@ -65,6 +65,14 @@ Behind the scenes, Hechechi takes great pains to maintain order and stability be
 
 Roll 1d4 on this table to determine the fad. The fad will last 1d10 days, then another fad should be rolled.
 
+[[table||0,*;*,0|
+Dice Roll ,, Fad ;;
+1         ,, Color. 1d8 for 1: red, 2: green, 3: blue, 4: yellow, 5: purple, 6: orange, 7: black, 8: white ;;
+2         ,, Metal. 1d6 for 1-2: gold, 3-4: silver, 5-6: copper ;;
+3         ,, Fur. 1d6 for 1: cattle, 2: sheep, 3: alpaca, 4: boar, 5: jaguar, 6: wolf ;;
+4         ,, Style. 1d6 for 1: many-layered, 2: formal, 3: plain, 4: athletic, 5: promiscuous, 6: costume
+]]
+
 # People
 
 ## Political Figures
@@ -78,7 +86,7 @@ Title: <em>Duke of Haatzai</em><br/>
 <div class="header">[[a|Duchess Enquilia Hechechi|Duke Quiliot]] (m el.pa [vampire] a) <br/> 
 Title: <em>Duchess of Haatzai</em><br/>
 <strong>Location</strong>: [[l|Ochitlath Keep]]</div>
-* Real name is Olikema Hechechi. She pretends to be 5e years old, but is really 653.
+* Real name is Olikema Hechechi. She pretends to be 53 years old, but is really 653.
 * Has long wavy blonde hair flowing to her waist, with several thin braids interspersed within. She has an outgoing, extroverted personality, though she never shouts or raises her voice. With her charm and grace, conversation is effortless, and many find themselves trusting her more than they would their closest friends. 
 
 <div class="header">[[a|Lord Coztic Tlatoani|Hastur]] [Hastur] (m hu.za a) <br/> 

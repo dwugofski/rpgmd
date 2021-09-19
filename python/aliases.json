@@ -29,6 +29,26 @@
 		"subtypes": ["dir", "abs"],
 		"value": "../res/xml/libs/mihil/creatures/"
 	},
+	"item_xsd": {
+		"type": "path",
+		"subtypes": ["file", "abs"],
+		"value": "../res/xml/templates/items/item.xsd"
+	},
+	"item_xslt_web": {
+		"type": "path",
+		"subtypes": ["file", "abs"],
+		"value": "../res/xml/templates/items/item.smallblock.xslt"
+	},
+	"item_lib_core": {
+		"type": "path",
+		"subtypes": ["dir", "abs"],
+		"value": "../res/xml/libs/core/items/"
+	},
+	"item_lib_mihil": {
+		"type": "path",
+		"subtypes": ["dir", "abs"],
+		"value": "../res/xml/libs/mihil/items/"
+	},
 	"footext": {
 		"type": "string",
 		"value": "{bartext}"

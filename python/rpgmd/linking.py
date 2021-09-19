@@ -22,15 +22,16 @@ class AnchorMacro(Macro):
 		'''Make an import macro from the provided details
 
 		Args:
-			- anchor (str): The ID of the anchor to use
-			- anchor_text (str|None): The text to use to display this anchor.
-				if None, no text will be used
+			- anchor_text (str): The text to use to display this anchor
+			- anchor (str|None): The ID of the anchor to use, if none, the
+				anchor text will be used
 			- *init_args (varargs): The arguments for the macro definition. See
 				the __init__ function for more details
 			- **init_kwargs (varargs): The keyword arguments for the macro
 				definition. See the __init__ function for more details
 		'''
-		attrs = [title, anchor_text]
+		aid = anchor_text if anchor is None else anchor
+		attrs = [anchor_text, aid]
 		macro_text = Macro.makeMacroText(AnchorMacro.TAG, attrs)
 		return AnchorMacro(macro_text, *init_args, **init_kwargs)
 
@@ -38,10 +39,11 @@ class AnchorMacro(Macro):
 		'''Create a macro object from the text containing it.
 
 		Format:
-			anchor | [anchor_text]
+			anchor_text | [anchor]
 		Where
-			- anchor (str): The ID of the anchor to use
 			- anchor_text (str): The text to use to display this anchor
+			- anchor (str): The ID of the anchor to use. If not provided, the
+				text will be used for the anchor
 
 		Args:
 			- text (str): The text (including the containing characters) for the
@@ -67,10 +69,10 @@ class AnchorMacro(Macro):
 				len(self.attrs)))
 
 		# Set the id
-		self.id = self.attrs[0]
+		self.text = self.attrs[0]
 
 		# Set the anchor text
-		self.text = self.attrs[1] if len(self.attrs) > 1 else self.id
+		self.id = self.attrs[1] if len(self.attrs) > 1 else self.attrs[0]
 
 	def compile(self, profile='web'):
 		'''Prototype method for compiling a macro into markdown / HTML
