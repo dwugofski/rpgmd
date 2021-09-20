@@ -220,6 +220,13 @@ Title: <em>Principle Magistrate</em> (Senior Magistrate)<br/>
 * Zaninya is not a brilliant wizard, but she is ambitious. While she has no particular passion for magical research, she knew the Arcane Magisterium was an unpassable opportunity for future wealth, and worked hard to rise the ranks. Now that she has a business venture that seems without end, she is happy to rest on her laurels, maintaining her clients' approval, but not being overly concerned about making new magical discoveries.
 * Zaninya styles herself as an important woman in Haatzan society, and, indeed, she is. The nobles and wealthy in the city constantly visit her for insight into coming trends and business opportunities. She could easily sway people towards certain courses of action, but would not take such risks without sufficient motivation.
 
+<div class="header">[[a|T'mqul Zicn|T'mqul]] (m hu.za ma) <br/>Title: <em>Docent</em> (High Magistrate)<br/><strong>Location</strong>: [[l|The Old Lamb Inn]]</div>
+
+* Resembling a lumberjack in build and beard, T'mqul is an friendly, if a bit imposing man. He is welcoming to all, and enjoys conversation with all sorts of company. Despite his keen mind and impressive accomplishments, he bears none of the stereotypical arrogance or aloofness of most mages.
+* T'mqul is an wizard proficient in enchantment magics. He rose in rank due to his discoveries involving a method to temporarily bypass the glutiligmal membrane surrounding class-4 axial constructs, allowing one to directly manipulate the class-3 sub-construct and later impose those changes on the class-2 sub-construct, rather than go about the traditional method of having to manipulate both sub-constructs concurrently. This method substantially improves the ease with which a wizard can construct permanent enchantment spells.
+* His current research efforts are investigating the application of enchantment spells to rectify the defects in the class-3 sub-construct lattice of the mentally infirm. His research is currently purely in the passive phase: studying the shape of the mind.
+* A few weeks ago, he received orders to assist Zaniya in her research for the next few months. However, upon arriving, Zaniya refused his help (she worries he has been sent to spy / replace her), so he has had nothing to do but twiddle his thumbs.
+
 <div class="header">[[a|Zuma Nochyacatle]] (f el.sk a) <br/>
 Title: <em>Associate Magistrate</em> (Junior Magistrate)</div>
 
@@ -400,12 +407,14 @@ Ochitlath Keep towers over the two rivers on either side of it. It has several s
 <div class="header">[[a|The Rose-Scented Flute]]<br/><strong>Location</strong>: Along the [[l|Hawkperch]] / [[l|Velveteen]] disctricts border, on the Velveteen side</div>
 
 **Description**:
+
 * High-end establishment, and very pricy even for its luxury
 * Doubles as brothel (though it does not advertise as such), with the (many,
 for an inn) maids doubling as bed companions for wanting guests
 * A favorite stopping point for well-off merchants
 
 **People**:
+
 * [[a|Elzer Ixiler|Elzer]] (m el.sk a): *Proprietor*
 	* A handome, if somewhat waifish, elven man with a pretty face and a
 	graceful air
@@ -415,9 +424,11 @@ for an inn) maids doubling as bed companions for wanting guests
 <div class="header">[[a|The Old Lamb Inn]]<br/><strong>Location:</strong>: [[l|Hawkperch]]</div>
 
 **Description**:
+
 * Midling establishment with fair rates
 
 **People**:
+
 * [[a|Delrizan]] (m hu.za ma): *Proprietor*
 	* Stout, salt-of-the-Earth man with a straightforward demeanor and an easy-
 	to-get-along-with personality. Willing to talk your ear off if he gets the

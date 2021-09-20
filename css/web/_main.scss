@@ -44,38 +44,42 @@ html {
 
 			// The index container
 			.index {
-				border: 0.2em solid var(--accent);
-				border-top: none;
-				list-style-type: none;
+				border-top: 0.2em solid var(--accent);
+				border-bottom: 0.2em solid var(--accent);
 				margin: 0 0 1em 0;
-				padding: 0.5em 1em;
+				padding: 0;
+				padding-bottom: 0.5em;
 
 				// The header for the index
 				h1 {
-					background-color: var(--accent-light);
-					border: 0.1em solid var(--accent);
+					border: none;
+					border-bottom: 0.05em solid var(--accent);
 					box-sizing: border-box;
 					color: var(--accent);
 					font-family: var(--serif-font);
-					font-size: 200%;
+					font-size: 180%;
 					font-weight: bold;
 					padding: 0.3em 0.5em;
-					text-align: center;
+					text-align: left;
 				}
 
 				// The list
 				ol {
 					list-style-type: none;
+					margin-bottom: 0;
+					padding: 0;
 
 					// List items
 					li {
 						color: var(--accent);
 						font-size: 150%;
 						font-weight: bold;
+						margin-left: 0.5em;
 
 						// Sub-lists
 						ol {
 							margin-bottom: 0.2em;
+							margin-left: 0.5em;
 						}
 
 						// Second-level nested items
@@ -96,6 +100,11 @@ html {
 								}
 							}
 						}
+
+						// Underline a link when you hover
+						a:hover {
+							text-decoration: underline;
+						}
 					}
 				}
 
@@ -109,27 +118,54 @@ html {
 
 			// The navbar container
 			.navbar {
+				border-top: 0.15em solid var(--accent-light);
+				border-bottom: 0.15em solid var(--accent-light);
 				margin-bottom: 1em;
+				padding:  0.2em 0;
 
 				// The center link
 				.link {
+					color: var(--accent-light);
 					float: left;
-					text-align: center;
+					font-family: var(--serif-font);
+					font-size: 150%;
+					font-weight: bold;
 					width: 50%;
+					text-align: center;
+
+					// Increase the size of the arrows (will only be applied to
+					// the fl/fr)
+					.larr {
+						font-size: 150%;
+					}
+					.rarr {
+						font-size: 150%;
+					}
+
+					// Get rid of link format
+					a {
+						color: inherit;
+						font-style: inherit;
+						text-decoration: inherit;
+					}
+					// Change color on hover
+					a:hover {
+						color: var(--accent);
+					}
 				}
 
 				// The left / previous link
 				.fl.link {
-					float: left;
-					min-height:  1em; // Min-height ensures it blocks text
+					font-size: 100%;
+					min-height:  1em;
 					text-align: left;
 					width: 25%;
 				}
 
 				// The right / next link
 				.fr.link {
-					float: right;
-					min-height:  1em; // Min-height ensures it blocks text
+					font-size: 100%;
+					min-height:  1em;
 					text-align: right;
 					width: 25%;
 				}

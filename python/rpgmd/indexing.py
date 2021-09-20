@@ -354,16 +354,16 @@ class NavBarMacro(FileMacro):
 			# Insert the previous link
 			output += '<div class="fl link">'
 			if not self.prevf is None:
-				output += '<a href="{0:s}">{1:s}</a>'.format(self.prevf[1].getRelPath(profile), self.prevf[0])
+				output += '<a href="{0:s}"><span class="larr">&laquo;</span> {1:s}</a>'.format(self.prevf[1].getRelPath(profile), self.prevf[0])
 			output += '</div>'
 
 			# Insert the index link
-			output += '<div class="fl ilink"><a href="{0:s}">{1:s}</a></div>'.format(self.index[1].getRelPath(profile), self.index[0])
+			output += '<div class="link"><a href="{0:s}">{1:s}</a></div>'.format(self.index[1].getRelPath(profile), self.index[0])
 
 			# Insert the next link
 			output += '<div class="fr link">'
 			if not self.nextf is None:
-				output += '<a href="{0:s}">{1:s}</a>'.format(self.nextf[1].getRelPath(profile), self.nextf[0])
+				output += '<a href="{0:s}">{1:s} <span class="rarr">&raquo;</span></a>'.format(self.nextf[1].getRelPath(profile), self.nextf[0])
 			output += '</div>'
 
 			# Close out the bar and return

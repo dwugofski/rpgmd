@@ -109,7 +109,7 @@ a layer of spells to hide those effects.
 
 ## [[a|Introducing T'mqul Zicn|Introducing T'mqul]]
 
-See the [[l|T'mqul Zicn|T'mqul]] section in the Haatz city notes for more
+See the [[l|T'mqul Zicn|haatz::T'mqul]] section in the Haatz city notes for more
 details on the wizard.
 
 It is important to introduce T'mqul Zicn as early as possible upon arriving to

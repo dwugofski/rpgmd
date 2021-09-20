@@ -218,11 +218,11 @@ class LinkMacro(Macro):
 		'''Create a macro object from the text containing it.
 
 		Format:
-			[namespace::]anchor | [link_text]
+			[link_text] | [namespace::]anchor
 		Where
 			- namespace (str): The name of the rpgmd document to link to
-			- anchor (str): The ID of the anchor to use
 			- anchor_text (str): The text to use to display this anchor
+			- anchor (str): The ID of the anchor to use
 
 		Args:
 			- text (str): The text (including the containing characters) for the
@@ -251,7 +251,7 @@ class LinkMacro(Macro):
 
 		# Get the link from either the first or second field
 		link_text = self.attrs[0]
-		if len(self.attrs) < 1:
+		if len(self.attrs) > 1:
 			link_text = self.attrs[1]
 
 		# Set the id

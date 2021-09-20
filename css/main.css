@@ -370,17 +370,49 @@ body #main .reward {
 	color: var(--green);
 }
 
-body #main .navbar .ilink {
+body #main .navbar {
+	border-top: 0.15em solid var(--accent-light);
+	border-bottom: 0.15em solid var(--accent-light);
+	margin-bottom: 1em;
+	padding:  0.2em 0;
+}
+
+body #main .navbar .link {
+	color: var(--accent-light);
+	float: left;
+	font-family: var(--serif-font);
+	font-size: 150%;
+	font-weight: bold;
 	width: 50%;
 	text-align: center;
 }
 
+body #main .navbar .link .larr {
+	font-size: 150%;
+}
+
+body #main .navbar .link .rarr {
+	font-size: 150%;
+}
+
+body #main .navbar .link a {
+	color: inherit;
+	font-style: inherit;
+	text-decoration: inherit;
+}
+
+body #main .navbar .link a:hover {
+	color: var(--accent);
+}
+
 body #main .navbar .fl.link {
+	font-size: 100%;
 	width: 25%;
 	min-height:  1em;
 	text-align: left;
 }
 body #main .navbar .fr.link {
+	font-size: 100%;
 	width: 25%;
 	text-align: right;
 }
