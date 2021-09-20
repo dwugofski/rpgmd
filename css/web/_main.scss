@@ -1,0 +1,529 @@
+
+html {
+	height: 100%;
+
+	body {
+		background-color: var(--bg-dark);
+		color: var(--fg);
+		display: flex;
+		flex-direction: column;
+		font-family: var(--sans-font);
+		height: 100%;
+		margin: 0;
+
+		// Floats
+		.fr { float: right; }
+		.fl { float: left; }
+		.clearer { clear: both; }
+
+		// Display options
+		.nodisp { display: none !important; }
+
+		// Container for page content
+		#main {
+			background-color: var(--bg);
+			box-sizing: border-box;
+			width: 8.5in;
+			margin: 1em auto;
+			padding: 1em;
+
+// -----------------------------------------------------------------------------
+// Important Containers --------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+			// Page title
+			#title {
+				color: var(--accent);
+				font-family: var(--title-font);
+				font-size: 300%;
+				font-variant: small-caps;
+				font-weight: bold;
+				margin-bottom: 0.3em;
+				text-align: center;
+			}
+
+			// The index container
+			.index {
+				border: 0.2em solid var(--accent);
+				border-top: none;
+				list-style-type: none;
+				margin: 0 0 1em 0;
+				padding: 0.5em 1em;
+
+				// The header for the index
+				h1 {
+					background-color: var(--accent-light);
+					border: 0.1em solid var(--accent);
+					box-sizing: border-box;
+					color: var(--accent);
+					font-family: var(--serif-font);
+					font-size: 200%;
+					font-weight: bold;
+					padding: 0.3em 0.5em;
+					text-align: center;
+				}
+
+				// The list
+				ol {
+					list-style-type: none;
+
+					// List items
+					li {
+						color: var(--accent);
+						font-size: 150%;
+						font-weight: bold;
+
+						// Sub-lists
+						ol {
+							margin-bottom: 0.2em;
+						}
+
+						// Second-level nested items
+						li {
+							font-size: 80%;
+							font-weight: normal;
+
+							// Third-level nested items
+							li {
+								font-size: 85%;
+								font-weight: normal;
+
+								// Fourth-level nested items
+								li {
+									color: var(--fg);
+									font-size: 100%;
+									font-weight: normal;
+								}
+							}
+						}
+					}
+				}
+
+				// Links in the list should inherit from the list
+				a {
+					color: inherit;
+					font-style: inherit;
+					text-decoration: inherit;
+				}
+			}
+
+			// The navbar container
+			.navbar {
+				margin-bottom: 1em;
+
+				// The center link
+				.link {
+					float: left;
+					text-align: center;
+					width: 50%;
+				}
+
+				// The left / previous link
+				.fl.link {
+					float: left;
+					min-height:  1em; // Min-height ensures it blocks text
+					text-align: left;
+					width: 25%;
+				}
+
+				// The right / next link
+				.fr.link {
+					float: right;
+					min-height:  1em; // Min-height ensures it blocks text
+					text-align: right;
+					width: 25%;
+				}
+			}
+
+			// Two-column content divider
+			.column2 {
+				width: calc(50% - 0.5em);
+				margin: 0;
+			}
+			// The left side
+			.column2.fl { margin-right: 0.5em; }
+			// The right side
+			.column2.fr { margin-left: 0.5em; }
+
+// -----------------------------------------------------------------------------
+// Images ----------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+			
+			// Container for an image
+			.img_container {
+				margin-bottom: 1em;
+				padding: 0;
+				width: 100%;
+
+				// Image block. By default has a border around it
+				img {
+					border: 0.2em solid var(--accent);
+					box-sizing: border-box;
+					display: block;
+					margin: 0 auto;
+					max-width: 100%;
+					max-height: 50em;
+				}
+
+				// The caption for the image
+				.caption {
+					font-family: var(--note-font);
+					font-style: italic;
+					margin: 0;
+					margin-top: 0.2em;
+					text-align: center;
+					width: 100%;
+				}
+			}
+			// An image container for an image without a border
+			.img_container.borderless {
+				img {
+					border-style: none;
+				}
+			}
+
+// -----------------------------------------------------------------------------
+// Tables ----------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+			
+			// Table
+			table {
+				border: 0.1em solid var(--green);
+				border-collapse: collapse;
+				margin: 0 0 1em 0;
+
+				// Normal / data cell
+				td {
+					background-color: var(--bg-shade);
+					border: 0.1em solid var(--green);
+					padding: 0.2em 0.5em;
+				}
+
+				// Highlighted / header cell
+				th {
+					background-color: var(--green);
+					border: 0.1em solid var(--green);
+					color: var(--bg);
+					font-family: var(--serif-font);
+					font-size: 100%;
+					font-variant: small-caps;
+					letter-spacing: 0.06em;
+					padding: 0.2em 0.5em;
+				}
+			}
+
+// -----------------------------------------------------------------------------
+// Rich Text -------------------------------------------------------------------
+// -----------------------------------------------------------------------------
+
+			// Paragraphs
+			p {
+				// Main paragraphs are not indented. Margin is below
+				margin-bottom: 1em;
+				margin-top: 0;
+				text-indent: 0em;
+			}
+			p.reverse_indent {
+				// Paragraphs where the content is indented, except for the
+				// first line
+				margin-left: 1em;
+				text-indent: -1em;
+			}
+
+			// Italicized text
+			em {
+				font-style: italic;
+			}
+
+			// Bold text
+			strong {
+				font-weight: bold;
+				text-decoration: none;
+			}
+
+			// Underlined text
+			u {
+				text-decoration: underline;
+			}
+
+			// Code
+			code {
+				color: var(--purple);
+				font-family: var(--code-font);
+			}
+
+			// Blockquote
+			blockquote {
+				color: var(--desc-light);
+				font-style: italic;
+				margin: 0 2em 1em 2em;
+			}
+
+			// Links
+			a {
+				color: var(--accent);
+				font-style: italic;
+				text-decoration: underline;
+			}
+
+			// A span whose content is an anchor for links
+			.anchor {
+				color: var(--accent);
+				font-style: normal;
+				font-weight: bold;
+				text-decoration: underline;
+			}
+
+			// A reward for some accomplishment
+			.reward { color: var(--green); }
+
+			// An encounter description
+			.encounter {
+				color: var(--red);
+				font-style: italic;
+
+				// Make the links have the same color / style as the encounter
+				a {
+					color: inherit;
+					font-style: inherit;
+				}
+			}
+
+			// Unordered lists
+			ul {
+				list-style-type: disc;
+				padding-inline-start: 1.5em;
+				margin: 0 0 1em 0;
+
+				// Second nested unordered list
+				ul {
+					list-style-type: circle;
+					margin-top: 0.1em;
+					margin-bottom: 0;
+
+					// Third nested
+					ul {
+						list-style-type: square;
+
+						// Fourth nested
+						ul {
+							list-style-type: circle;
+
+							// Fifth nested
+							ul {
+								list-style-type: disc;
+
+								// Sixth nested
+								ul {
+									list-style-type: circle;
+
+									// Seventh nested (hopefully last)
+									ul { list-style-type: square; }
+								}
+							}
+						}
+					}
+				}
+			}
+			// Lists after paragraphs should not have a margin above them
+			p ~ ul { margin-top: -1em; }
+
+			// Ordered lists
+			ol {
+				list-style-type: decimal;
+				margin: 0 0 1em 0;
+				padding-inline-start: 1.5em;
+
+				// Second-level nested list
+				ol {
+					list-style-type: lower-alpha;
+					margin-top: 0.1em;
+					margin-bottom: 0;
+
+					// Third-level nested
+					ol {
+						list-style-type: lower-roman;
+
+						// Fourth
+						ol {
+							list-style-type: upper-alpha;
+
+							// Fifth
+							ol {
+								list-style-type: upper-roman;
+
+								// Sixth
+								ol {
+									list-style-type: decimal;
+
+									// Seventh (hopefully last)
+									ol { list-style-type: lower-alpha; }
+								}
+							}
+						}
+					}
+				}
+			}
+			// Lists after paragraphs should not have a margin above them
+			p ~ ol {
+				margin-top: -1em;
+			}
+
+			// Header level 1
+			h1 {
+				border-bottom: 0.1em solid var(--accent);
+				border-top: 0.1em solid var(--accent);
+				color: var(--accent);
+				font-family: var(--serif-font);
+				font-size: 200%;
+				font-weight: bold;
+				margin-bottom: 0.5em;
+				margin-top: 0;
+				padding-bottom: 0.1em;
+				padding-top: 0.1em;
+
+				// Make sure links and anchors are not differentiated
+				a {
+					color: inherit;
+					font-style: inherit;
+					text-decoration: inherit;
+				}
+				.anchor {
+					color: inherit;
+					font-style: inherit;
+					font-weight: inherit;
+					text-decoration: inherit;
+				}
+			}
+
+			// Header level 2
+			h2 {
+				border-bottom: 0.2em double var(--accent);
+				color: var(--accent);
+				font-family: var(--serif-font);
+				font-size: 150%;
+				font-style: normal;
+				font-weight: bold;
+				margin-bottom: 0.7em;
+				margin-top: 0;
+				text-decoration: none;
+
+				// Make sure links and anchors are not differentiated
+				a {
+					color: inherit;
+					font-style: inherit;
+					text-decoration: inherit;
+				}
+				.anchor {
+					color: inherit;
+					font-style: inherit;
+					font-weight: inherit;
+					text-decoration: inherit;
+				}
+			}
+
+			// Header level 3
+			h3 {
+				border-bottom: 0.1em solid var(--accent);
+				color: var(--accent);
+				font-family: var(--serif-font);
+				font-size: 110%;
+				font-style: normal;
+				font-weight: bold;
+				margin-bottom: 1em;
+				margin-top: 0;
+				text-decoration: none;
+
+				// Make sure links and anchors are not differentiated
+				a {
+					color: inherit;
+					font-style: inherit;
+					text-decoration: inherit;
+				}
+				.anchor {
+					color: inherit;
+					font-style: inherit;
+					font-weight: inherit;
+					text-decoration: inherit;
+				}
+			}
+
+			// Header level 4
+			h4 {
+				border-bottom: 0.1em dashed var(--accent);
+				color: var(--accent);
+				font-family: var(--serif-font);
+				font-size: 110%;
+				font-style: normal;
+				font-weight: bold;
+				margin-bottom: 1em;
+				margin-top: 0;
+				text-decoration: none;
+
+				// Make sure links and anchors are not differentiated
+				a {
+					color: inherit;
+					font-style: inherit;
+					text-decoration: inherit;
+				}
+				.anchor {
+					color: inherit;
+					font-style: inherit;
+					font-weight: inherit;
+					text-decoration: inherit;
+				}
+			}
+
+			// Header level 5
+			h5 {
+				border-bottom: 0.1em dashed var(--fg);
+				color: var(--fg);
+				font-family: var(--serif-font);
+				font-size: 100%;
+				font-style: italic;
+				font-weight: normal;
+				margin-bottom: 1em;
+				margin-top: 0;
+				text-decoration: none;
+
+				// Make sure links and anchors are not differentiated
+				a {
+					color: inherit;
+					font-style: inherit;
+					text-decoration: inherit;
+				}
+				.anchor {
+					color: inherit;
+					font-style: inherit;
+					font-weight: inherit;
+					text-decoration: inherit;
+				}
+			}
+
+			// Header level 6
+			h6 {
+				border-bottom: 0.1em dotted var(--fg);
+				color: var(--fg);
+				font-family: var(--serif-font);
+				font-size: 100%;
+				font-style: normal;
+				font-weight: normal;
+				margin-bottom: 1em;
+				margin-top: 0;
+
+				// Make sure links and anchors are not differentiated
+				a {
+					color: inherit;
+					font-style: inherit;
+					text-decoration: inherit;
+				}
+				.anchor {
+					color: inherit;
+					font-style: inherit;
+					font-weight: inherit;
+					text-decoration: inherit;
+				}
+			}
+		}
+	}
+}

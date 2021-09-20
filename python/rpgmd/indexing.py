@@ -136,7 +136,7 @@ class IndexMacro(FileMacro):
 				output += '<div class="index"><h1>Index</h1>'
 
 			# Create the unordered list for the indexed items
-			output += '<ul class="index">'
+			output += '<ol>'
 			for item in self.items:
 				# Get the path to the linked item
 				link_path = item.getRelPath(profile='web')
@@ -155,7 +155,7 @@ class IndexMacro(FileMacro):
 					# Rethrow (Document-based) exceptions with the information for this macro
 					raise MacroError(type(e), str(e))
 				output += '</li>'
-			output += '</ul>'
+			output += '</ol>'
 
 			# Close the containing div if we are a root index
 			if depth == 0:

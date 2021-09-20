@@ -1,0 +1,121 @@
+
+// Container for statblocks
+body #main .statblock_holder {
+	border-bottom: 0.2em solid var(--accent);
+	margin-bottom: 1em;
+
+	// The header for the statblock list
+	.statblock_holder_heading {
+		border-bottom: 0.1em solid var(--accent);
+		border-top: 0.1em solid var(--accent);
+		color: var(--accent);
+		font-family: var(--serif-font);
+		font-size: 150%;
+		font-style: normal;
+		font-weight: bold;
+		margin-bottom: 0.7em;
+		padding: 0.2em 0;
+		text-align: center;
+	}
+
+	// A statblock itself
+	.statblock {
+
+		// The header for the block
+		.statblock_header {
+			border-bottom: 0.2em solid var(--accent);
+			border-top: 0.2em solid var(--accent);
+			margin-top: 1em;
+			padding-top: 0.1em;
+
+			// The name header
+			h1 {
+				border: none;
+				font-size: 100%;
+				margin-bottom: 0;
+				max-width: calc(60% - 1em);
+				text-transform: uppercase;
+			}
+
+			// The level header
+			h2 {
+				border: none;
+				font-size: 100%;
+				margin-bottom: 0;
+				max-width: calc(40% - 1em);
+				text-transform: uppercase;
+			}
+		}
+
+		// The tags bar
+		.statblock_tags {
+
+			// A tag for the statblock
+			.statblock_tag {
+				background: var(--accent);
+				border: 0.2em solid var(--bg-dark);
+				color: var(--bg-light);
+				display: inline-block;
+				font-size: 80%;
+				margin: 0.1em 0.05em;
+				padding: 0.2em 0.4em;
+				text-transform: uppercase;
+			}
+			// First tag should have no left margin
+			.statblock_tag:first-child { margin-left: 0; }
+			// Last tag should have no right margin
+			.statblock_tag:last-child { margin-right: 0; }
+			// Special background colors based on the tag type
+			.statblock_tag.rarity { background-color: var(--orange); }
+			.statblock_tag.alignment { background-color: var(--blue); }
+			.statblock_tag.size { background-color: var(--green); }
+			.statblock_tag.type { background-color: var(--purple); }
+			.statblock_tag.trait { background-color: var(--red); }
+		}
+
+		// Each section should have a border on the bottom
+		.statblock_section { border-bottom: 0.1em solid var(--accent); }
+		// Except for the last
+		.statblock_section:last-child { border-bottom: 0; }
+
+		// Paragraphs in the statblock
+		p {
+			// Should be reverse-indented by default
+			font-size: 80%;
+			margin-bottom: 0.2em;
+			margin-left: 0.5em;
+			text-indent: -0.5em;
+		}
+		// Plaintext descriptions should be first-line indented
+		p.plaintext {
+			margin-left: 0em;
+			text-indent: 0.5em;
+		}
+
+		// Lists
+		ul {
+			margin-top: 0;
+			margin-bottom: 0.2em;
+		}
+		ol {
+			margin-top: 0;
+			margin-bottom: 0.2em;
+		}
+
+	}
+	// The first statblock in its list/column
+	.statblock:first-child {
+
+		// Do not give it a top border
+		.statblock_header {
+			border-top: none;
+			margin-top: 0em;
+			padding-top: 0;
+		}
+	}
+}
+// If the holder has no title, make no border
+body #main .statblock_holder.notitle {
+	border-bottom: none;
+	margin-bottom: 0;
+}
