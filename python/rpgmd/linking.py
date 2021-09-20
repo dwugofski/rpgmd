@@ -249,13 +249,18 @@ class LinkMacro(Macro):
 			raise MacroError(ValueError, 'Link macro does not have enough attributes, only has {0:d} attributes'.format(
 				len(self.attrs)))
 
+		# Get the link from either the first or second field
+		link_text = self.attrs[0]
+		if len(self.attrs) < 1:
+			link_text = self.attrs[1]
+
 		# Set the id
-		nsanch_m = nsanch_p.match(self.attrs[0])
+		nsanch_m = nsanch_p.match(link_text)
 		self.anchor_id = nsanch_m.group(3)
 		self.namespace = nsanch_m.group(2) # Will be None if there is no namespace specified
 
 		# Set the anchor text
-		self.text = self.attrs[1] if len(self.attrs) > 1 else self.anchor_id
+		self.text = self.attrs[0] if len(self.attrs) > 1 else self.anchor_id
 
 	def compile(self, profile='web'):
 		'''Prototype method for compiling a macro into markdown / HTML

@@ -5,4 +5,4 @@
 [[css|web|{cssdir}npc.css]]
 [[css|web|{cssdir}toc_index.css]]
 
-[[index|Makafellan Campaign|./setting/index.md,./campaign/index.md]]
+[[index|Makafellan Campaign Notes|./setting/index.md,./campaign/index.md]]
