@@ -128,6 +128,12 @@ unethical to test any of his reparative theories out on a living person, but he
 is quite skilled at scrying the mind and diagnosing the nature of different
 illnesses. This area of research will be extremely useful to the party.
 
+```
+It is not a coincidence that T'mul is present in Haatz with the party. He was
+directed there by Hrogthl in anticipation of the party's arrival, so that he
+could help them discover the nature of Ux's affliction.
+```
+
 If the party learns of Ux and his illness earlier than T'mqul's introduction,
 the party can be pointed to T'mqul by consulting people. A helpful soul might
 connect Ux to T'mqul by saying something like, "I heard that new wizard in town
@@ -146,5 +152,97 @@ Some leads to get the party moving are outlined in the following sections.
 Please be sure to [[l|introduce T'mqul|Introducing T'mqul]] as early as
 possible.
 
-* The Tower of Ux
-* 
+## Learning about the Crown
+
+The goal of the first part of the investigation is to get the party to speak
+with Ux and start looking for his crown. Talking with anyone in the city about
+[[l|haatz::The Library of Xechen]] will get them to mention Ux, the madman who
+lurks in the tower. If the party travels to the library, Ux will be waiting
+inside.
+
+[[a|Speaking with Ux]]: As the party approaches the library, Ux will creak open
+the door at shout at them to stay away. He is agoraphobic and reclusive, not
+wanting to speak with the party and not wanting them near the tower. The party
+as well gets a sense of unease as they approach the tower, feeling as though
+it is on the verge of collapse (see [[l|The Tower of Ux]] for details).
+
+If they party mentions that they are seeking the Totem of Exanell, Ux will get
+upset, yell in agony, and insist they leave as he claims to have no idea what
+they are talking about (a `DC 15 Sense Motive` check will reveal he is lying,
+and, even on a failure, they can tell that them mentioning the totem hurt him).
+If the party claims they are working for Exanell, or if they leave, Ux will hear
+from Exanell that he should let them in, so he will.
+
+Speaking with Ux is difficult (see [[l|Roleplaying Ux]] below for details), but
+the wizard does attempt to communicate the nature of the affliction befalling
+him and the tower. Before leaving, the party should have an understanding that
+Ux knows how to help the party, but his affliction keeps him unable to. This
+should lead the party to talk with [[l|T'mul Zicn|Introducing T'mqul]], assuming
+they are familiar with the wizard and his specialization.
+
+[[a|Roleplaying Ux]]: While everyone else sees the library in its destroyed
+state, Ux is still able to see it in its full glory. As well, being Exanell's
+high priest in Zalazich, Ux is able to commune with her agents and hear messages
+from his goddess. Sadly, these factors combined have led the people of Haatz to
+conclude that Ux is insane: hearing voices and seeing hallucinations.
+
+Due to the psychic surgery Ezlavin performed on him, Ux was unable to properly
+understand the nature of the library, his relationship with Exanell, or his role
+in preserving the library during its slumber. Without the knowledge of why he
+was able to perceive things others could not, Ux started to believe everyone
+else's claims that he was insane, so he sought refuge in the library, where he
+felt safe and distant from others.
+
+Over a century of self-isolation have made Ux antisocial: borderline paranoid
+around others. With this isolation, his social skills of declined, as his only
+companion has been the voice of Kilizenal, a male angel of Exanell who has been
+assigned to look over and monitor Ux. Kilizenal and Ux are good friends, though
+Ux believes Kilizenal is a figment of his delusions. Still, as his only
+companion, Ux talks regularly with Kilizenal.
+
+Only Ux's personal memories and his understanding of his situation were stored
+in the crown. His ability to reason and his perception of reality are all
+fully-functioning. However, his insistence that the tower is intact and his
+constant chatting and consulting with Kilizenal present the appearance that he
+is insane. Additionally, without any real knowledge of who he is, where he is,
+or what he is doing, Ux is easily confused and distracted, adding to his
+addle-minded appearance.
+
+While conversing with others, Ux will mutter to himself constantly; he does not
+really have a verbal filter. He will also talk to Kilizenal often, sharing his
+impressions of the party members and consulting with the angel as if the party
+were not standing there. Not having had people in the library before, Ux will
+regularly check with Kilizenal on what he should say and how he should act.
+
+If the party asks Ux about the library, Ux will remark about how beautiful it
+is, and how wonderful it has been staying there. He will remark that the tower
+has always been his home, for as long as he can remember, though that is only
+as far as the Atzivecan conquests. Asking him questions about the totem of
+Exanell will cause him to clutch his head as he experiences great pain. Any
+mention or conversation about the totem will be agony for Ux, and he will beg
+the party to stop talking or asking about it.
+
+Kilizenal is the one who vouched for the party on their arrival to the library.
+If the party is having trouble determining what to do next, Kilizenal will
+get Ux to relay a message to the party concerning a wizard in an inn who may be
+able to help.
+
+[[a|Taking Ux to T'mul]]: If the party takes Ux to T'mul, the wizard will
+reluctantly accept the responsibility to see what he can do for the elf. The
+procedure to look into Ux's mind will take approximately 1 hour, during which
+time Ux will be placed into a semi-conscious state and T'mul will explore the
+landscape of his mind.
+
+After the procedure, T'mul will inform the party that Ux's mind has been cut
+apart, with pieces and memories carved out as if via surgery. Not only are there
+memories Ux cannot recall, but the open wounds from their absense will cause him
+intense, blinding agony whenever he even tries to remember them. However, in
+many places he noticed distinct, artificial etchings in Ux's mental topography.
+Based on some of his past research, T'mul believes these etchings were part of
+an enchanted item used to interface with the mind. It is possible that artifact
+could hold the key to repairing his mind.
+
+T'mul does not know exactly what the artifact could be or would look like.
+However, based on a surface level understanding of what it likely does, he would
+expect that the artifact is likely a crown, circlet, or hat of some sort,
+composed largely of copper, and maybe containing some larimar fittings.
