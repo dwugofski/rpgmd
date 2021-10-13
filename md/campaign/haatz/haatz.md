@@ -185,7 +185,7 @@ House Ixmuca are the overseers of the meat (including hunting), livestock, and t
 young lord has sought to woo their way into his heart by bedding Zath, but, much
 to their heartbreaking dismay, none has succeeded
 * Secretly in love with [[l|Elzer]], though many assume his visits to the
-[[l|Velveteen]] district are just to meet up with various loose men
+[[l|Velveteen]] district are just to meet up with various men of the night.
 
 ### [[a|House Tepin]]
 
@@ -411,7 +411,8 @@ Ochitlath Keep towers over the two rivers on either side of it. It has several s
 * High-end establishment, and very pricy even for its luxury
 * Doubles as brothel (though it does not advertise as such), with the (many,
 for an inn) maids doubling as bed companions for wanting guests
-* A favorite stopping point for well-off merchants
+* A favorite stopping point for the elite of the city as well as very well-off
+merchants
 
 **People**:
 

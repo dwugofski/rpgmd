@@ -246,3 +246,92 @@ T'mul does not know exactly what the artifact could be or would look like.
 However, based on a surface level understanding of what it likely does, he would
 expect that the artifact is likely a crown, circlet, or hat of some sort,
 composed largely of copper, and maybe containing some larimar fittings.
+
+## The Hunt for the Crown
+
+After learning about the crown, the party will be tasked with locating it. Their
+search will take them to six of the eight noble houses of Haatz, allowing the
+party to get a feel and impression of the complexity of the Haatzan political
+system. 
+
+[[a|The Path of the Crown]]: Months ago, Eligi, a gnome antiquarian of pre-
+Atzivecan artifacts, discovered a copper circlet with larimar fittings forgotten
+in his shop, when, Chimuva Hrel, a servant of House Ixmuca, found and purchased
+it for her lady. A few weeks later, as part of a payment for House Kisin
+poisoning lord Hrelak Uyakil, a lesser noble and vassal of House Uaynih who
+embarassed Lady Mental by wearing a wig many considered superior to Lady Mental,
+Lord Lemuhl Kisin accepted the crown from House Ixmuca. 
+
+Lemuhl purchased the crown for his love interest, Lady Kiraza Kahau. He could
+not give a gift which could be easily traced to House Kisin for fear their
+secret relationship would be discovered. Also wanting to keep the relationship
+a secret, Lady Kiraza had the crown taken to the family's country home in Ulitz.
+However, the caravan was raided by the Summer Suns Gang, who were hired by
+Lord Tlatoani to retrieve the crown.
+
+### Starting the Hunt: The Antiquarian
+
+Asking around for a crown requires the party to `Gather Information (DC 15)`. On
+a success, the party learns that the most likely location for information on the
+crown would be within House Steelgad's sales archives, as merchants are required
+to document any sale, purchase, or recovery of any jewels, gems, or jewelry with
+House Steelgad at the top of each month. If a merchant of the city has the
+crown, it should be recorded with them. The party can then progress with looking
+at the [[l|Steelgad Records]].
+
+If the Gather Information check succeeds by 15 or more, the investigation will
+lead the party to discover that the Eligi, a gnome antiquarian of pre-Atzivecan
+goods in the city, mentioned he sold a crown a few months ago. Eligi mentioned
+the story because he had no memory of where the crown came from, and he
+remembers where everything in his shop came from.
+
+[[a|Steelgad Records]]: The Steelgad records hall is located in the Hawkperch
+district. The records hall is maintained by a dwarf commoner (`Will DC 23`)
+named Kovraga Steelgad (f dw ma). The Steelgad records hold an acount of all
+transactions involving masonry, ore, metal, gems, and precious stones, including
+metal jewelry (though not gem-encrusted clothes). These records are extensive,
+maintained and compiled each month to analyze and track the prices of those
+goods within the city. These records are not available to the public, and
+Kovraga is not inclined to break the rules.
+
+If the party wishes, they can find [[l|Bodi Steelgad|haatz::Bodi]] in 
+[[l|The Rose-Scented Flute|haatz::The Rose-Scented Flute]], deep in wine and
+debauchery. If they indulge with him for a time, he will take a liking to them
+and be more than willing to let them take a look at the boring old records if
+they want. He will sign a writ giving them access to the records.
+
+The party can `Purse a Lead (DC 20 Society)` on the crown while looking through
+the records, or ask Kovraga to search for what they are looking for herself. In
+the former case, the activity takes 30 minutes per check, and, in the latter
+case, it takes 2 hours for Kovraga to find what they are looking for. In either
+event, once completed, the party learns that the crown was sold to Chimuva Hrel,
+in the name of House Ixmuca, from the antiquarian Eligi.
+
+If the party searches for themselves and gets a critical success on the check,
+they also learn that Eligi registered the crown (paying the appropriate fee) in
+the same report he listed the sale of the crown. This there is no accounting for
+where the crown came from, even though the records do make a listing of all
+jewelry salvaged from before the Atzivecan Empire. 
+
+[[a|Eligi the Antiquarian]]: Eligi (m gn e) is a retired curator for House Kat,
+and he runs his shop out of his home in Lanterntown. After retiring from House
+Kat, he has used his pension to purchase pre-Atzivecan antiques from noble
+houses seeking to offload their trinkets. He regularly resells the trinkets to
+the houses for further events, turning a modest profit with each transaction,
+which has supplemented his pension and allowed him to live comfortably while
+still amassing a sizeable collection.
+
+Despite his age, Eligi has a keen memory for all the items in his collection.
+He knows exactly where every one of his antiques are, how he first got them, and
+every time he has sold / bought-back them. With this memory, he finds it strange
+and concerning that he has no memory of where the crown came from, or how it
+came to be in his shop. One day, Chimuva Hrel, a regular customer from House
+Ixmuca who always brings delicious papaya jam and toast on each of her visits
+&mdash;she's a lovely young woman who, despite being dedicated to her job, still
+manages to find time for the important things in life. She's always eager to
+listen to him tell her about the most interesting items in his collection. Like
+one of the forks in his collection, which, based on the engraving around the
+ha&mdash;
+
+Oh. Yes. The circlet. Well Chimuva purchased it a few months ago for her lady,
+who wanted it for one of her wigs for a party.
