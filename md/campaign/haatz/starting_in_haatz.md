@@ -269,6 +269,13 @@ a secret, Lady Kiraza had the crown taken to the family's country home in Ulitz.
 However, the caravan was raided by the Summer Suns Gang, who were hired by
 Lord Tlatoani to retrieve the crown.
 
+[[a|The High Noble Estates]]: The high noble families each has a somewhat-
+fortified estate within the city. Each house retains 20 armed guards for
+protection, except for House Uaynih, who retain 30. It is likely that at this
+point the party has made a reputation for themselves traveling from city to
+city, so the heads of the household may be delighted to host the party in their
+house, asking them to regale them with stories of their adventures.
+
 ### Starting the Hunt: The Antiquarian
 
 Asking around for a crown requires the party to `Gather Information (DC 15)`. On
@@ -335,3 +342,52 @@ ha&mdash;
 
 Oh. Yes. The circlet. Well Chimuva purchased it a few months ago for her lady,
 who wanted it for one of her wigs for a party.
+
+### The Circlet and House Ixmuca
+
+Chimuva Hrel originally purchased the crown for Lady Mental for a party being
+held by Lord Coztic. However, at that party, Lord Hrelak Uyakil, a lesser noble
+and vassal of House Uaynih, embarrassed Lady Mental by wearing a better wig than
+she, so Lady Mental had the crown traded to Lemuhl Kisin in return for having
+Lord Hrelak poisoned.
+
+[[a|Speaking with Chimuva]]: Chimuva knows about the ordeal with Lord Coztic's
+party and the drama with Lord Hrelak, but does not know what happened to the
+crown after the party. She believes her lady likely had it destroyed in anger
+for her humiliation. 
+
+When Chimuva discusses Lord Hrelak, she will mention that he had passed away
+some time after the party. The party can `Sense Motive (DC 10)` to determine
+that, when discussing Lord Hrelak, Chimuva is particularly uncomfortable. The
+party can try to `Request or Coerce (DC 15)` Chimuva to reveal what is making
+her uncomfortable. Chimuva does not want to accept that her lady had Lord Hrelak
+murdered, but the circumstances of his death were suspicious, and Lord Lemuhl
+of House Kisin came to visit the following morning, and everyone knows that, if
+anyone wanted someone poisoned, that person would have to work with House Kisin
+one way or another.
+
+[[a|Finding the Records of the Poisoning]]: Records of the transaction exist in
+the Ixmuca and Kisin estates. They list that, in exchange for, "Medical services
+administered to Lord Hrelak Uyakil," House Ixmuca has provided, "500 gp worth of
+sundry items."
+
+### The Romance of Kisin and Kahau
+
+Thanks to some of the nudging and opportunities created at various feasts and
+parties by Lord Coztic, Lord Lemuhl of House Kisin and Lady Kiraza of House
+Kahau have been growing progressively more in love with one another. They are
+keeping their relationship a secret, because their families are rivals. As a
+result, they have been meeting in secret.
+
+[[a|Tracking Down Lemuhl]]: Asking about the crown in the Kisin estate does not
+yield any substantial information. No one in the house is familiar with it; it
+seems only Lord Lemuhl would know where it is. However, Lord Lemuhl is not in
+the estate. He is one for taking long constitutionals, and it seems he is off
+on one now... though usually his walks are not as long as he has been gone.
+
+Lord Lemuhl's personal vallet, Volohul Hrellel (m. el.st. a; will DC 15), is
+familiar with Lemuhl's infatuation with Lady Kiraza, and he knows where the two
+like to meet (a small glade outside the city walls; all arranged by Lord
+Coztic). However, he does not want to betray his lord's privacy, so will not
+volunteer information on Lord Lemuhl's location, though he is the most obvious
+person to know where they are. A 
