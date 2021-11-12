@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<creature id="crocodile"
+	xmlns="https://github.com/dwugofski/rpgmd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://github.com/dwugofski/rpgmd coc.creature.xsd">-->
+<creature id="crocodile">
+	<name>Crocodile</name>
+	<subname>Nile</subname>
+	<characteristics>
+		<strength>
+			<base>130</base>
+			<roll>(4d6+12)x5</roll>
+		</strength>
+		<constitution>
+			<base>90</base>
+			<roll>(3d6+8)x5</roll>
+		</constitution>
+		<size>
+			<base>130</base>
+			<roll>(4d6+12)x5</roll>
+		</size>
+		<dexterity>
+			<base>35</base>
+			<roll>(2d6)x5</roll>
+		</dexterity>
+		<power>
+			<base>50</base>
+			<roll>(3d6)x5</roll>
+		</power>
+	</characteristics>
+	<hitpoints>
+		<int>22</int>
+	</hitpoints>
+	<damage>
+		<roll>2d6</roll>
+	</damage>
+	<build>
+		<int>3</int>
+	</build>
+	<move>
+		<int>6</int>
+		<alternate>
+			<name>swimming</name>
+			<int>8</int>
+		</alternate>
+	</move>
+	<attacks>
+		<int>1</int>
+	</attacks>
+	<specials>
+		<special>
+			<name>Fighting attacks</name>
+			<description>
+				<p>The main danger of course is their bite, but a large one can thrash around and cause impact damage.</p>
+			</description>
+		</special>
+		<special type="maneuver">
+			<name>Bite and hold</name>
+			<description>
+				<p>Vicious jaws; once they have hold they are unlikely to let go and may drag their victims underwater to drown.</p>
+			</description>
+		</special>
+	</specials>
+	<fighting>
+		<chance>50</chance>
+		<damage>
+			<roll><metavar ref="dmg_bonus"/></roll>
+		</damage>
+	</fighting>
+	<maneuvers>
+		<maneuver>
+			<name>Bite and hold</name>
+			<description>
+				<p>damage <roll>1d10+<metavar def="dmg_bonus"/></roll>, followed by <roll><metavar def="dmg_bonus"/></roll> each round while held (or drowning)</p>
+			</description>
+		</maneuver>
+	</maneuvers>
+	<dodge>
+		<chance>17</chance>
+	</dodge>
+	<armor>
+		<points>5</points>
+		<type>hide</type>
+	</armor>
+	<skills>
+		<skill>
+			<name>stealth</name>
+			<chance>60</chance>
+			<modifier>in water 80%</modifier>
+		</skill>
+	</skills>
+	<habitat>
+		<p>Tropics, espcially saltwater jungle marshes worldwide</p>
+	</habitat>
+</creature>
