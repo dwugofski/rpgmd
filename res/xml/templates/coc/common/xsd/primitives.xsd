@@ -57,6 +57,7 @@
 		</xs:annotation>
 		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
+	<xs:element name="name" type="name"/>
 
 	<xs:simpleType name="int">
 		<xs:annotation>
@@ -66,6 +67,7 @@
 		</xs:annotation>
 		<xs:restriction base="xs:integer"/>
 	</xs:simpleType>
+	<xs:element name="int" type="int"/>
 
 	<xs:simpleType name="decimal">
 		<xs:annotation>
@@ -75,6 +77,7 @@
 		</xs:annotation>
 		<xs:restriction base="xs:decimal"/>
 	</xs:simpleType>
+	<xs:element name="dec" type="decimal"/>
 
 	<xs:simpleType name="bool">
 		<xs:annotation>
@@ -84,5 +87,6 @@
 		</xs:annotation>
 		<xs:restriction base="xs:boolean"/>
 	</xs:simpleType>
+	<xs:element name="bool" type="bool"/>
 
 </xs:schema>

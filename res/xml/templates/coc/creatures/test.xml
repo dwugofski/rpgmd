@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coc:root id="crocodile" type="beast"
+	xmlns:coc="https://github.com/dwugofski/rpgml/coc"
+	xmlns="https://github.com/dwugofski/rpgml"
+	>
+	<coc:details>
+		<coc:name>
+			SomethingSomething
+			<coc:long>FOOBNAR</coc:long>
+			<coc:short>fb</coc:short>
+		</coc:name>
+		<coc:name>
+			ELSELSELSE
+			<coc:long>BNAR</coc:long>
+			<coc:short>fdddb</coc:short>
+		</coc:name>
+	</coc:details>
+</coc:root>

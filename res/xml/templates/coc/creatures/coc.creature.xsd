@@ -22,7 +22,8 @@
 			Elements ===========================================================
 			-->
 			<xs:sequence>
-				<xs:element name="name" type="rpgml:name">
+				<!--<xs:element name="name" type="rpgml:name">-->
+				<xs:element ref="rpgml:name">
 					<xs:annotation>
 						<xs:documentation xml:lang="en">
 							The display name for the creature
@@ -46,41 +47,7 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="strength" type="characteristic">
-								<xs:annotation>
-									<xs:documentation xml:lang="en">
-										The creature's strength (STR)
-									</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="constitution" type="characteristic">
-								<xs:annotation>
-									<xs:documentation xml:lang="en">
-										The creature's constitution (CON)
-									</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="size" type="characteristic">
-								<xs:annotation>
-									<xs:documentation xml:lang="en">
-										The creature's size (SIZ)
-									</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="dexterity" type="characteristic">
-								<xs:annotation>
-									<xs:documentation xml:lang="en">
-										The creature's dexterity (DEX)
-									</xs:documentation>
-								</xs:annotation>
-							</xs:element>
-							<xs:element name="power" type="characteristic">
-								<xs:annotation>
-									<xs:documentation xml:lang="en">
-										The creature's power (POW)
-									</xs:documentation>
-								</xs:annotation>
-							</xs:element>
+							<xs:element ref="char" minOccurs="5" maxOccurs="5"/>
 						</xs:sequence>
 					</xs:complexType>
 				</xs:element>
@@ -109,7 +76,7 @@
 					</xs:annotation>
 				</xs:element>
 
-				<xs:element name="damage" minOccurs="0">
+				<xs:element name="damage-bonus" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation xml:lang="en">
 							The damage bonus from the creature
@@ -167,7 +134,7 @@
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="special">
+							<xs:element name="special" minOccurs="0" maxOccurs="unbounded">
 								<xs:annotation>
 									<xs:documentation xml:lang="en">
 										A special action the creature can make
@@ -291,7 +258,7 @@
 					</xs:complexType>
 				</xs:element>
 
-				<xs:element name="horror" minOccurs="0" type="rpgml:richText">
+				<xs:element name="horror" minOccurs="0" type="rpgml:intNumeric">
 					<xs:annotation>
 						<xs:documentation xml:lang="en">
 							The amount of sanity lost in encounters with this creature
@@ -351,14 +318,14 @@
 		</xs:annotation>
 		<xs:choice>
 			<xs:sequence>
-				<xs:element name="base" type="rpgml:int">
+				<xs:element ref="chance">
 					<xs:annotation>
 						<xs:documentation xml:lang="en">
-							The base / average value for the characteristic
+							The base / average chance for the characteristic
 						</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="roll" type="rpgml:roll" minOccurs="0">
+				<xs:element ref="rpgml:roll" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation xml:lang="en">
 							Specification for how to roll for the characteristic
@@ -367,9 +334,21 @@
 				</xs:element>
 			</xs:sequence>
 			<xs:group ref="rpgml:intGroup"/>
-			<xs:group ref="nanValues"/>
+			<xs:group ref="rpgml:nanValues"/>
 		</xs:choice>
+		<xs:attribute name="name" use="required">
+			<xs:simpleType>
+				<xs:restriction base="rpgml:plaintext">
+					<xs:enumeration value="strength"/>
+					<xs:enumeration value="constitution"/>
+					<xs:enumeration value="size"/>
+					<xs:enumeration value="dexterity"/>
+					<xs:enumeration value="power"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
 	</xs:complexType>
+	<xs:element name="char" type="characteristic"/>
 
 	<xs:simpleType name="creatureType">
 		<xs:annotation>

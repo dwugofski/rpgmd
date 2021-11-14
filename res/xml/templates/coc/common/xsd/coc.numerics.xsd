@@ -19,6 +19,30 @@
 	Commonly-used complex and simple types for numeric display
 	-->
 
+	<xs:element name="chance" type="rpgml:int">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				The percent probability that a thing will happen
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="hard" type="rpgml:int">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				The percent probability that a thing will happen under "hard" circumstances (typically half probability)
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="extreme" type="rpgml:int">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				The percent probability that a thing will happen under "extreme" circumstances (typically one-fifth probability)
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
 	<xs:group name="probabilityGroup">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">
@@ -26,35 +50,17 @@
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="chance" type="rpgml:int">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">
-						The percent probability that the thing will happen
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="hard" type="rpgml:int" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">
-						The percent probability that the thing will happen under "hard" circumstances (typically half probability)
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="extreme" type="rpgml:int" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">
-						The percent probability that the thing will happen under "extreme" circumstances (typically one-fifth probability)
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="modifier" type="rpgml:modifier" minOccurs="0">
+			<xs:element ref="chance"/>
+			<xs:element ref="hard" minOccurs="0"/>
+			<xs:element ref="extreme" minOccurs="0"/>
+			<xs:element ref="rpgml:modifier" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="en">
 						How the probability might be modified by circumstances
 					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="extra" type="rpgml:richText" minOccurs="0">
+			<xs:element ref="rpgml:extra" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="en">
 						Extra text describing the probability
@@ -82,7 +88,7 @@
 			</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name" type="rpgml:name">
+			<xs:element ref="rpgml:name">
 				<xs:annotation>
 					<xs:documentation xml:lang="en">
 						The display name for the probability
@@ -92,36 +98,5 @@
 			<xs:group ref="probabilityGroup"/>
 		</xs:sequence>
 	</xs:complexType>
-
-	<xs:group name="nanValues">
-		<xs:annotation>
-			<xs:documentation xml:lang="en">
-				Represents a numeric value which can take a value beyond a numeric range
-			</xs:documentation>
-		</xs:annotation>
-		<xs:choice>
-			<xs:element name="null">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">
-						A value which has not been specified (but is not zero)
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="na">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">
-						A value which either does not make sense or does not apply
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="varies">
-				<xs:annotation>
-					<xs:documentation xml:lang="en">
-						A value which can vary based on differen circumstances
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:choice>
-	</xs:group>
 
 </xs:schema>
