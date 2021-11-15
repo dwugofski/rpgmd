@@ -18,29 +18,6 @@
 	Types to display enhanced text for the purposes of display.
 	-->
 
-	<xs:complexType name="variable">
-		<xs:annotation>
-			<xs:documentation xml:lang="en">
-				A specification for a meta-variable, whose value is determined while compiling the output
-			</xs:documentation>
-		</xs:annotation>
-		<xs:attribute name="ref" type="xs:token"/>
-	</xs:complexType>
-	<xs:element name="var" type="variable"/>
-
-	<xs:element name="link">
-		<xs:annotation>
-			<xs:documentation xml:lang="en">
-				A link to some other element.
-			</xs:documentation>
-		</xs:annotation>
-		<xs:complexType mixed="true">
-			<xs:group ref="richTextElements" minOccurs="0"/>
-			<xs:attribute name="type" type="lower"/>
-			<xs:attribute name="ref" type="id_string"/>
-		</xs:complexType>
-	</xs:element>
-
 	<xs:element name="em" type="richText">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">
@@ -81,18 +58,6 @@
 		</xs:annotation>
 	</xs:element>
 
-	<xs:complexType name="roll" mixed="true">
-		<xs:annotation>
-			<xs:documentation xml:lang="en">
-				A specification for a rolled value
-			</xs:documentation>
-		</xs:annotation>
-		<xs:choice minOccurs="0" maxOccurs="unbounded">
-			<xs:element ref="var"/>
-		</xs:choice>
-	</xs:complexType>
-	<xs:element name="roll" type="richText"/>
-
 	<xs:group name="richTextElements">
 		<xs:annotation>
 			<xs:documentation xml:lang="en">
@@ -100,6 +65,10 @@
 			</xs:documentation>
 		</xs:annotation>
 		<xs:choice>
+			<xs:element ref="int"/>
+			<xs:element ref="dec"/>
+			<xs:element ref="bool"/>
+			<xs:element ref="roll"/>
 			<xs:element ref="var"/>
 			<xs:element ref="link"/>
 			<xs:element ref="em"/>
@@ -107,7 +76,7 @@
 			<xs:element ref="u"/>
 			<xs:element ref="cite"/>
 			<xs:element ref="mark"/>
-			<xs:element ref="roll"/>
+			<xs:group ref="nanValues"/>
 		</xs:choice>
 	</xs:group>
 

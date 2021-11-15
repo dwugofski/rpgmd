@@ -247,7 +247,7 @@
 									</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="extra" type="rpgml:richText">
+							<xs:element ref="rpgml:extra">
 								<xs:annotation>
 									<xs:documentation xml:lang="en">
 										Extra text describing spells to include
@@ -258,7 +258,7 @@
 					</xs:complexType>
 				</xs:element>
 
-				<xs:element name="horror" minOccurs="0" type="rpgml:intNumeric">
+				<xs:element name="horror" minOccurs="0" type="sanityCheck">
 					<xs:annotation>
 						<xs:documentation xml:lang="en">
 							The amount of sanity lost in encounters with this creature
@@ -316,26 +316,31 @@
 				A characteristic for a creature
 			</xs:documentation>
 		</xs:annotation>
-		<xs:choice>
-			<xs:sequence>
-				<xs:element ref="chance">
+		<xs:sequence>
+			<xs:choice>
+				<xs:group ref="probabilityGroup">
 					<xs:annotation>
 						<xs:documentation xml:lang="en">
 							The base / average chance for the characteristic
 						</xs:documentation>
 					</xs:annotation>
-				</xs:element>
-				<xs:element ref="rpgml:roll" minOccurs="0">
+				</xs:group>
+				<xs:group ref="rpgml:nanValues">
 					<xs:annotation>
 						<xs:documentation xml:lang="en">
-							Specification for how to roll for the characteristic
+							Specification for when values are not as expected
 						</xs:documentation>
 					</xs:annotation>
-				</xs:element>
-			</xs:sequence>
-			<xs:group ref="rpgml:intGroup"/>
-			<xs:group ref="rpgml:nanValues"/>
-		</xs:choice>
+				</xs:group>
+			</xs:choice>
+			<xs:element ref="rpgml:roll" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+						Specification for how to roll for the characteristic
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
 		<xs:attribute name="name" use="required">
 			<xs:simpleType>
 				<xs:restriction base="rpgml:plaintext">

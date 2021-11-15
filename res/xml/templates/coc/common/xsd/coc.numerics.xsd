@@ -99,4 +99,57 @@
 		</xs:sequence>
 	</xs:complexType>
 
+	<xs:group name="sanityCheckGroup">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				Group to express a sanity loss which may require a check based on current sanity
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+						The sanity lost on a successful check
+					</xs:documentation>
+				</xs:annotation>
+				<xs:element ref="rpgml:int"/>
+				<xs:element ref="rpgml:roll"/>
+			</xs:choice>
+			<xs:choice minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+						The sanity lost on a failed check
+					</xs:documentation>
+				</xs:annotation>
+				<xs:element ref="rpgml:int"/>
+				<xs:element ref="rpgml:roll"/>
+			</xs:choice>
+			<xs:element ref="rpgml:modifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+						Extra text describing situations which change the check or its results
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="rpgml:extra" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="en">
+						Extra, descriptive text
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:complexType name="sanityCheck">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				Represents a sanity check in response to something
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:group ref="sanityCheckGroup"/>
+		</xs:sequence>
+	</xs:complexType>
+
 </xs:schema>

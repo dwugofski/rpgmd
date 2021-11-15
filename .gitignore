@@ -147,3 +147,7 @@ res/img/
 
 # Ignore output html files
 html/
+!res/**/html
+res/**/*.html
+res/**/*.dmp
+res/**/*.txt

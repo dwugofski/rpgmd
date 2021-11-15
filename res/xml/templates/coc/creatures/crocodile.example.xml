@@ -35,6 +35,7 @@
 	</coc:hitpoints>
 	<coc:damage-bonus>
 		<roll>2d6</roll>
+		<modifier><roll>2d8</roll> when in water</modifier>
 	</coc:damage-bonus>
 	<coc:build>
 		<int>3</int>
@@ -65,9 +66,7 @@
 	</coc:specials>
 	<coc:fighting>
 		<coc:chance>50</coc:chance>
-		<coc:effect>
-			<roll><var ref="dmg_bonus"/></roll> damage
-		</coc:effect>
+		<coc:effect><roll><var ref="dmg_bonus"/></roll> damage</coc:effect>
 	</coc:fighting>
 	<coc:maneuvers>
 		<coc:maneuver>
@@ -91,6 +90,10 @@
 			<modifier>in water 80%</modifier>
 		</coc:skill>
 	</coc:skills>
+	<coc:horror>
+		<int>5</int>
+		<roll>1d5</roll>
+	</coc:horror>
 	<coc:habitat>
 		<p>Tropics, espcially saltwater jungle marshes worldwide</p>
 	</coc:habitat>

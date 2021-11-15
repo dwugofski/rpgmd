@@ -33,6 +33,7 @@
 	<xsl:template match="coc:name">
 		<p>
 			<xsl:apply-templates/>
+			<xsl:value-of select="(./coc:long | ./coc:short)[2]"/>
 		</p>
 	</xsl:template>
 

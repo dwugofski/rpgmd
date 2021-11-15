@@ -89,4 +89,84 @@
 	</xs:simpleType>
 	<xs:element name="bool" type="bool"/>
 
+	<xs:element name="nan">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				A numeric value which is invalid
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="null">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				A value which has not been specified (but is not zero)
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="na">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				A value which either does not make sense or does not apply
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="varies">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				A value which can vary based on differen circumstances
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:group name="nanValues">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				Represents a numeric value which can take a value beyond a numeric range
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element ref="null"/>
+			<xs:element ref="na"/>
+			<xs:element ref="varies"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="roll" mixed="true">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				A specification for a rolled value
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="var"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:element name="roll" type="roll"/>
+
+	<xs:complexType name="variable">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				A specification for a meta-variable, whose value is determined while compiling the output
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="ref" type="xs:token"/>
+	</xs:complexType>
+	<xs:element name="var" type="variable"/>
+
+	<xs:element name="link">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				A link to some other element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:group ref="richTextElements" minOccurs="0"/>
+			<xs:attribute name="type" type="id_string"/>
+			<xs:attribute name="ref" type="id_string"/>
+		</xs:complexType>
+	</xs:element>
+
 </xs:schema>
