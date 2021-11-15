@@ -128,22 +128,40 @@
 			</div>
 
 			<!-- Skills -->
-			<div class="skills">
-				<p>
-					<strong><xsl:text>Skills:</xsl:text></strong>
-					<xsl:text> </xsl:text>
-					<xsl:for-each select="./coc:skills/coc:skill">
-						<xsl:call-template name="Tcamelcase">
-							<xsl:with-param name="text" select="./rpgml:name"/>
-						</xsl:call-template>
+			<xsl:if test="count(./coc:skills/*) >= 1">
+				<div class="skills">
+					<p>
+						<strong><xsl:text>Skills:</xsl:text></strong>
 						<xsl:text> </xsl:text>
-						<xsl:apply-templates select="."/>
-						<xsl:if test="position() != last()">
-							<xsl:text>, </xsl:text>
-						</xsl:if>
-					</xsl:for-each>
-				</p>
-			</div>
+						<xsl:for-each select="./coc:skills/coc:skill">
+							<xsl:call-template name="Tcamelcase">
+								<xsl:with-param name="text" select="./rpgml:name"/>
+							</xsl:call-template>
+							<xsl:text> </xsl:text>
+							<xsl:apply-templates select="."/>
+							<xsl:if test="position() != last()">
+								<xsl:text>, </xsl:text>
+							</xsl:if>
+						</xsl:for-each>
+					</p>
+				</div>
+			</xsl:if>
+
+			<!-- Spells -->
+			<xsl:if test="count(./coc:spells/*) >= 1">
+				<div class="spells">
+					<p>
+						<strong><xsl:text>Spells:</xsl:text></strong>
+						<xsl:text> </xsl:text>
+						<xsl:for-each select="./coc:spells/*">
+							<xsl:if test="position() > 1">
+								<xsl:text>, </xsl:text>
+							</xsl:if>
+							<xsl:apply-templates/>
+						</xsl:for-each>
+					</p>
+				</div>
+			</xsl:if>
 
 			<!-- Descriptive Flavor Text -->
 			<div class="specials">
@@ -235,13 +253,14 @@
 			<p>
 				<strong>
 					<xsl:value-of select="./rpgml:name"/>
+					<xsl:text>:</xsl:text>
 				</strong>
 				<xsl:choose>
 					<xsl:when test="@type='maneuver'">
-						<strong><xsl:text> (mnvr)</xsl:text></strong>
+						<strong><xsl:text> (mnvr):</xsl:text></strong>
 					</xsl:when>
 				</xsl:choose>
-				<xsl:text>: </xsl:text>
+				<xsl:text> </xsl:text>
 				<xsl:apply-templates select="rpgml:description/rpgml:p[1]/node()"/>
 			</p>
 			<xsl:apply-templates select="rpgml:description/*[position()>1]"/>
@@ -256,9 +275,9 @@
 			<p>
 				<strong>
 					<xsl:value-of select="./rpgml:name"/>
-					<xsl:text> (mnvr)</xsl:text>
+					<xsl:text> (mnvr):</xsl:text>
 				</strong>
-				<xsl:text>: </xsl:text>
+				<xsl:text> </xsl:text>
 				<xsl:apply-templates select="rpgml:description/rpgml:p[1]/node()"/>
 			</p>
 			<xsl:apply-templates select="rpgml:description/*[position()>1]"/>
@@ -314,6 +333,13 @@
 				<xsl:text>*</xsl:text>
 			</xsl:if>
 		</span>
+	</xsl:template>
+
+	<!--**
+		Translate a spell
+	-->
+	<xsl:template match="coc:spell">
+		<span class="spellref"><xsl:value-of select="."/></span>
 	</xsl:template>
 
 </xsl:stylesheet>

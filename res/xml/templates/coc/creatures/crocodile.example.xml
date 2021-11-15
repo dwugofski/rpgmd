@@ -90,6 +90,11 @@
 			<modifier>in water 80%</modifier>
 		</coc:skill>
 	</coc:skills>
+	<coc:spells>
+		<coc:spell>foobar</coc:spell>
+		<extra>Something something</extra>
+		<coc:spell>moobar</coc:spell>
+	</coc:spells>
 	<coc:horror>
 		<int>5</int>
 		<roll>1d5</roll>
