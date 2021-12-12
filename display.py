@@ -4,7 +4,7 @@ import re
 import lxml.etree as etree
 
 from pathlib import Path
-
+from markdown2 import markdown
 
 from .core import *
 
@@ -172,7 +172,7 @@ class TableMacro(Macro):
 
 	@staticmethod
 	def makeMacro(items, headers, classes, *init_args, **init_kwargs):
-		'''Make an import macro from the provided details
+		'''Make a table macro from the provided details
 
 		Args:
 			- items (list<list<str>>): 2D array of items to render in the table
@@ -210,8 +210,8 @@ class TableMacro(Macro):
 
 		# Make the macro
 		attrs = [items_text, headers_text, classes_text]
-		macro_text = Macro.makeMacroText(ImageMacro.TAG, attrs)
-		return ImageMacro(macro_text, *init_args, **init_kwargs)
+		macro_text = Macro.makeMacroText(TableMacro.TAG, attrs)
+		return TableMacro(macro_text, *init_args, **init_kwargs)
 
 	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
 		'''Create a macro object from the text containing it.
@@ -376,6 +376,121 @@ class TableMacro(Macro):
 
 # Add the table macro class to the list
 addMacroClass(TableMacro)
+
+class FlavorTextMacro(Macro):
+	'''Macro to create a flavor text block
+
+	Attributes:
+		- text (str): The markdown text contained inside the flavor text
+		- classes (List<str>): The additional classes for the flavor text macro
+	'''
+
+	TAG = 'flavor'
+
+	@staticmethod
+	def makeMacro(text, classes, *init_args, **init_kwargs):
+		'''Make a quote macro from the provided details
+
+		Args:
+			- text (str): The markdown text inside the macro
+			- classes (list<str>): The additional classes to add to the output
+				quote block.
+			- *init_args (varargs): The arguments for the macro definition. See
+				the __init__ function for more details
+			- **init_kwargs (varargs): The keyword arguments for the macro
+				definition. See the __init__ function for more details
+		'''
+		# Translate the classes to text
+		classes_text = ''
+		for classn in classes:
+			classes_text += classn + ','
+		classes_text = classes_text[:-1]
+
+		# Make the macro
+		attrs = [text, classes_text]
+		macro_text = Macro.makeMacroText(FlavorTextMacro.TAG, attrs)
+		return FlavorTextMacro(macro_text, *init_args, **init_kwargs)
+
+	def __init__(self, text, startline, startcolumn, endline, endcolumn, doc):
+		'''Create a macro object from the text containing it.
+
+		Format:
+			[classes |] text
+		Where
+			- classes (str): Comma-separated-values for classes to apply to the
+				table
+			- text (str): The basic markdown text contained inside the quote
+				(this cannot include macro-unsafe characters)
+
+		Args:
+			- text (str): The text (including the containing characters) for the
+				macro
+			- startline (int): The line the macro starts on
+			- startcolumn (int): The character index the macro starts on
+			- endline (int): The line the macro ends on
+			- endcolumn (int): The character index the macro ends on
+			- doc (Document): The document object defining the macro
+
+		Raise:
+			- ValueError:
+				- The macro spec string contains a badly-formatted attribute
+				- Not enough attributes were provided to the macro
+		'''
+
+		# The Macro superclass will parse all of the attributes
+		super(FlavorTextMacro, self).__init__(text, startline, startcolumn, endline, endcolumn, doc)
+
+		# Check to make sure we have enough attributes
+		if len(self.attrs) < 1:
+			raise MacroError(ValueError, 'Flavor text macro does not have enough attributes, only has {0:d} attributes'.format(
+				len(self.attrs)))
+
+		# Get the classes
+		if len(self.attrs) > 1:
+			self.classes = Macro.extractListString(self.attrs[0])
+			self.text = self.attrs[1]
+		else:
+			self.classes = []
+			self.text = self.attrs[0]
+
+	def compile(self, profile='web'):
+		'''Method for compiling a macro into markdown / HTML
+
+		Args:
+			- profile='web' (str): The compiling profile for the macro. Options
+				are listed in the Document.compile documentation
+
+		Raise:
+			- NotImplementedError:
+				- The compiling profile is not supported
+		'''
+
+		if profile == 'web':
+			# Create the table with the given classes
+			class_text = 'flavortext'
+			for classstr in self.classes:
+				classstr = classstr.lower()
+				if classstr == 'flavortext':
+					continue
+				class_text += ' ' + classstr
+			output = '<div>' + markdown(self.text) + '</div>'
+			output = etree.XML(output)
+			output.set('class', class_text)
+			return etree.tostring(output, encoding=str)
+		else:
+			raise MacroError(NotImplementedError, 'Image macro does not support "{0:s}" profile'.format(profile))
+
+	def iscompileable(self):
+		'''Protoype method for compiling a macro into markdown / HTML
+
+		Return:
+			'True' if the macro can be compiled, otherwise 'False'. For this
+			class, always return 'True'
+		'''
+		return True
+
+# Add the table macro class to the list
+addMacroClass(FlavorTextMacro)
 
 class StatblockMacro(Macro):
 	'''Macro class to handle the display of a statblock

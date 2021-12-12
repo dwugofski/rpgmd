@@ -91,6 +91,7 @@ class ValAlias(object):
 		file = Path(file)
 		if not file.is_file():
 			raise FileNotFoundError('Could not find file "{0:s}" for making an alias dictionary'.format(str(file)))
+		file = file.resolve()
 
 		# Open and parse the file
 		ret = {}

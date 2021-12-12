@@ -128,26 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Sass file ignores
-.sass-cache/
-*.css.map
-*.sass.map
-*.scss.map
-
-# Ignore temp files
-tmp/
-*.tmp
-
-# Ignore image resources (should not be stored on github)
-res/img/
-*.png
-*.jpg
-*.jpeg
-*.gif
-
-# Ignore output html files
-html/
-!res/**/html
-res/**/*.html
-res/**/*.dmp
-res/**/*.txt
+# Test files
+test/
