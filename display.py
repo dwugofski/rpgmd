@@ -647,7 +647,7 @@ class StatblockMacro(Macro):
 				# Use validator with parser if we have an XSD file
 				xsd_doc = etree.parse(str(self.xsd))
 				xsd_schema = etree.XMLSchema(xsd_doc)
-				xsd_schema.validate(source) # Will throw syntax error if invalid
+				xsd_schema.assert_(source) # Will throw syntax error if invalid
 
 			# Get the transform
 			xslt_doc = etree.parse(str(self.xslts[profile]))
@@ -655,11 +655,11 @@ class StatblockMacro(Macro):
 			output_doc = xslt_transform(source)
 
 			# And get the output as string
-			return etree.tostring(output_doc, method='html', encoding='unicode')
+			return etree.tostring(output_doc, method='html', encoding='unicode', pretty_print=False)
 
 		except Exception as e:
 			# Rethrow (e.g. XML-based) exceptions with the information for this macro
-			raise MacroError(type(e), 'Problem compiling Statblock from XML:\n' + str(e))
+			raise MacroError(type(e), 'Problem compiling Statblock from XML ({0:s}):\n'.format(str(self.source)) + str(e))
 
 	def iscompileable(self):
 		'''Protoype method for compiling a macro into markdown / HTML
