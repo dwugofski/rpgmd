@@ -133,7 +133,7 @@ class IndexMacro(FileMacro):
 
 			# Only output the title if we are at max depth
 			if depth == 0:
-				output += '<div class="index"><h1>Index</h1>'
+				output += '<div id="index"><h1>Index</h1>'
 
 			# Create the unordered list for the indexed items
 			output += '<ol>'
@@ -349,16 +349,32 @@ class NavBarMacro(FileMacro):
 
 		if profile == 'web':
 			# Create the bar div
-			output = '<div class="navbar">'
+			# output = '<div class="navbar">'
+			output = '<div id="navbar"><table><tr>'
+
+			output += '<td>'
+			if not self.prevf is None:
+				output += '<a href="{0:s}"><span class="larr">&laquo;</span> {1:s}</a>'.format(self.prevf[1].getRelPath(profile), self.prevf[0])
+			output += '</td>'
+
+			output += '<td><a href="{0:s}">{1:s}</a></td>'.format(self.index[1].getRelPath(profile), self.index[0])
+
+			output += '<td>'
+			if not self.nextf is None:
+				output += '<a href="{0:s}">{1:s} <span class="rarr">&raquo;</span></a>'.format(self.nextf[1].getRelPath(profile), self.nextf[0])
+			output += '</td>'
+
+			output += '</tr></table></div>'
+
+			'''
+			# Insert the index link
+			output += '<div class="link"><a href="{0:s}">{1:s}</a></div>'.format(self.index[1].getRelPath(profile), self.index[0])
 
 			# Insert the previous link
 			output += '<div class="fl link">'
 			if not self.prevf is None:
 				output += '<a href="{0:s}"><span class="larr">&laquo;</span> {1:s}</a>'.format(self.prevf[1].getRelPath(profile), self.prevf[0])
 			output += '</div>'
-
-			# Insert the index link
-			output += '<div class="link"><a href="{0:s}">{1:s}</a></div>'.format(self.index[1].getRelPath(profile), self.index[0])
 
 			# Insert the next link
 			output += '<div class="fr link">'
@@ -368,6 +384,7 @@ class NavBarMacro(FileMacro):
 
 			# Close out the bar and return
 			output += '<div class="clearer"></div></div>'
+			'''
 			return output
 		else:
 			raise MacroError(NotImplementedError, 'Anchor macro does not support "{0:s}" profile'.format(profile))

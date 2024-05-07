@@ -126,7 +126,7 @@ class ImageMacro(Macro):
 			# May need to convert Path to string
 			if isinstance(self.img, Path):
 				imgsrc = str(self.img.as_posix())
-			output += '<img src="{0:s}"/>'.format(imgsrc)
+			output += '<img src="{0:s}" onclick="window.open(\'{0:s}\', \'_blank\');"/>'.format(imgsrc)
 
 			# Add the title (optional)
 			if not self.title is None:
@@ -138,7 +138,7 @@ class ImageMacro(Macro):
 				# May need to convert Path to string
 				if isinstance(self.player_link, Path):
 					plink = str(self.player_link.as_posix())
-				output += '<div class="caption"><a href="{0:s}" target="_blank">(Player version)</a></div>'.format(plink)
+				output += '<div class="caption link"><a href="{0:s}" target="_blank">(Player version)</a></div>'.format(plink)
 
 			# Close the container and return
 			output += "</div>"
@@ -226,9 +226,10 @@ class TableMacro(Macro):
 				format:
 					row,col
 				where
-				- row (int|*): Is the row index to match ('*' matches all rows)
-				- col (int|*): Is the column index to match ('*' matches all
-					columns)
+				- row (int|*|a): Is the row index to match ('*' and 'a' match
+					all rows)
+				- col (int|*|a): Is the column index to match ('*' and 'a'
+					match all columns)
 				So, to make all items on the second row be header cells, one
 				would use the spec
 					1,*
@@ -270,7 +271,7 @@ class TableMacro(Macro):
 		# Set the headers
 		self.headers = []
 		headers = Macro.extractListString(self.attrs[1], delimiter=';')
-		header_p = re.compile(r"[\s]*([0-9]+|\*)[\s]*,[\s]*([0-9]+|\*)[\s]*", re.DOTALL | re.MULTILINE)
+		header_p = re.compile(r"[\s]*([0-9]+|\*|a)[\s]*,[\s]*([0-9]+|\*|a)[\s]*", re.DOTALL | re.MULTILINE)
 		for header in headers:
 			header_m = header_p.match(header)
 			if header_m:
@@ -301,11 +302,11 @@ class TableMacro(Macro):
 		for header in self.headers:
 			(hrow, hcolumn) = header.split(',')
 			# Check if there is a row mismatch
-			if hrow != '*':
+			if (hrow != '*') and (hrow != 'a'):
 				if row != int(hrow):
 					continue
 			# Check if there is a column mismatch
-			if hcolumn != '*':
+			if (hcolumn != '*') and (hcolumn != 'a'):
 				if column != int(hcolumn):
 					continue
 			# Otherwise, we have matched both row and column
@@ -655,7 +656,8 @@ class StatblockMacro(Macro):
 			output_doc = xslt_transform(source)
 
 			# And get the output as string
-			return etree.tostring(output_doc, method='html', encoding='unicode', pretty_print=False)
+			output = etree.tostring(output_doc, method='html', encoding='unicode', pretty_print=False)
+			return output.replace('<br></br>', "<br/>") # For some reason the compiler breaks these apart when it shouldn't.
 
 		except Exception as e:
 			# Rethrow (e.g. XML-based) exceptions with the information for this macro

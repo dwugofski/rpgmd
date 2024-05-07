@@ -815,7 +815,7 @@ class CSSMacro(HeaderMacro):
 		'''
 		if profile in self.profiles:
 			if profile == 'web':
-				return '<link rel="stylesheet" href="{0:s}"/>'.format(str(self.file.as_posix()))
+				return '<link rel="stylesheet" href="file:///{0:s}"/>'.format(str(self.file.as_posix()))
 			else:
 				raise MacroError(NotImplementedError, 'CSS macro does not support "{0:s}" profile'.format(profile))
 		else:
